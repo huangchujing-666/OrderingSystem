@@ -1,0 +1,151 @@
+﻿@{
+    ViewBag.Title = "拼饭详情";
+}
+@using OrderingSystem.Domain;
+@model OrderingSystem.Admin.Models.RiceDateVM
+@section head{
+    <style type="text/css">
+        .ibox-content img{
+            max-height:300px;
+            max-width:300px;
+        }
+    </style>
+}
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        拼饭详情 
+                    </h5>
+                    <a class="btn btn-white pull-right" href="javascript:history.go(-1);">返回</a>
+                </div>
+                <div class="ibox-content">
+                    <form id="from" class="form-horizontal">
+                        <input type="hidden" class="form-control" name="id" id="id" value="@Model.RiceDate.RiceDateId">
+                        
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">拼饭编号：</label>
+                            <div class="col-sm-10">
+                                <label class="control-label">@Model.RiceDate.RiceDateId</label>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">参与年龄：</label>
+                            <div class="col-sm-10">
+                                <label class="control-label">@Model.RiceDate.Age</label>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">参与性别：</label>
+                            <div class="col-sm-10">
+                                <label class="control-label">@Model.RiceDate.Sex</label>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">参与人数：</label>
+                            <div class="col-sm-10">
+                                <label class="control-label">@Model.RiceDate.UserCount</label>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">开始时间：</label>
+                            <div class="col-sm-10">
+                                <label class="control-label">@Model.RiceDate.BeginDate</label>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">活动地区：</label>
+                            <div class="col-sm-10">
+                                <label class="control-label">@Model.RiceDate.Zone</label>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商家名称：</label>
+                            <div class="col-sm-10">
+                                <label class="control-label">@Model.RiceDate.BusinessName</label>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商家地址：</label>
+                            <div class="col-sm-10">
+                                <label class="control-label">@Model.RiceDate.Address</label>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商家口味：</label>
+                            <div class="col-sm-10">
+                                <label class="control-label">@Model.RiceDate.Taste</label>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">付款方式：</label>
+                            <div class="col-sm-10">
+                                <label class="control-label">@Model.RiceDate.PayWay</label>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">发起人：</label>
+                            <div class="col-sm-10">
+                                <label class="control-label">
+                                    @if (Model.RiceDate.User != null)
+                                    {
+                                        @Model.RiceDate.User.NickName
+                                    }
+                                    else
+                                    {
+                                        @Model.RiceDate.UserId
+                                    }</label>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">发起时间：</label>
+                            <div class="col-sm-10">
+                                <label class="control-label">@Model.RiceDate.CreateTime</label>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div> 
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">活动备注：</label>
+                            <div class="col-sm-10">
+                                <label class="control-label">@Model.RiceDate.Remark</label>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">活动图片：</label>
+                            <div class="col-sm-10">
+                                @foreach (var item in Model.BaseImageList)
+                                {
+                                    <img src="@(item.Source + item.Path)" />
+                                }
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                @*<button id="btnSave" class="btn btn-primary" type="button">保存内容</button>*@
+                                <a class="btn btn-white" href="javascript:history.go(-1);">返回</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script{
+    @*<script src="@("/Scripts/ViewJs/BaseArea/baseAreaEdit.js"+OrderingSystem.Admin.Versions.Ver)"></script>*@
+}

@@ -1,0 +1,142 @@
+﻿@{
+    ViewBag.Title = "支付列表";
+}
+@using OrderingSystem.Domain;
+@model OrderingSystem.Admin.Models.PayDetailVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="row" style="padding:10px 10px;">
+                        <form action="/PayDetail/List" method="get">
+                            <div class="row col-sm-12"> 
+                                <div class="col-sm-3">
+                                    订单编号：
+                                    <input type="text" id="QueryOrderNo" name="QueryOrderNo" class="form-control inline" style="width:70%;" placeholder="请输入查询订单编号" value="@(Model.QueryOrderNo ?? "")">
+                                </div>
+                                <div class="col-sm-3">
+                                    下单人：<input type="text" id="QueryUserName" name="QueryUserName" class="form-control inline" style="width:70%;" placeholder="请输入查询下单人" value="@(Model.QueryUserName ?? "")">
+                                </div>
+                                <div class="col-sm-3">
+                                    订单状态：
+                                    <select class="form-control inline" style="width:70%;" id="QueryPayStatus" name="QueryPayStatus">
+                                        <option @(Model.QueryPayStatus == 0 ? "selected" : "")  value="0">请选择状态</option>
+                                        <option @(Model.QueryPayStatus == (int)EnumHelp.PayStatus.未支付 ? "selected" : "") value="@((int)EnumHelp.PayStatus.未支付)">未付款</option>
+                                        <option @(Model.QueryPayStatus == (int)EnumHelp.PayStatus.已支付 ? "selected" : "") value="@((int)EnumHelp.PayStatus.已支付)">已付款</option> 
+                                        <option @(Model.QueryPayStatus == (int)EnumHelp.PayStatus.支付超时 ? "selected" : "") value="@((int)EnumHelp.PayStatus.已支付)">支付超时</option> 
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row col-sm-12" style="margin-top:15px;">
+                                <div class="col-sm-4">
+                                    创建日期：
+                                    <input placeholder="开始日期" class="form-control layer-date" id="QueryStartTime" name="QueryStartTime" style="vertical-align:middle;width:105px;" value="@(Model.QueryStartTime??"")">
+                                    <input placeholder="结束日期" class="form-control layer-date" id="QueryEndTime" name="QueryEndTime" style="vertical-align:middle;width:105px;" value="@(Model.QueryEndTime??"")">
+                                </div>
+                                <span style="float:right;margin-right:40px;">
+                                    <button type="submit" class="btn btn-primary">搜索</button>
+                                    <button type="button" id="btnExport" class="btn btn-info"><i class="fa fa-file-excel-o padding-right-4"></i>&nbsp;导出Execl</button>
+                                </span>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">序号</th>
+                                    <th class="text-center">订单编号</th>
+                                    <th class="text-right">金额(￥)</th>
+                                    <th class="text-center">下单人</th>
+                                    <th class="text-center">下单人电话</th> 
+                                    <th class="text-center">备注信息</th>
+                                    <th class="text-center">订单时间</th>
+                                    <th class="text-center">支付时间</th>
+                                    <th class="text-center">支付方式</th>
+                                    <th class="text-center">返回序列号</th>
+                                    <th class="text-center">支付状态</th>
+                                    @*<th>操作</th>*@
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Paging.Items != null && Model.Paging.Items.Count > 0)
+                                {
+                                    foreach (var item in Model.Paging.Items)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@item.PayDetailId</td>
+                                            <td class="text-center">@item.OrderNo</td>
+                                            <td class="text-right">@item.Amount</td>
+                                            <td class="text-center">
+                                                @if (item.User != null)
+                                                {
+                                                    @item.User.NickName
+                                                }
+                                                else
+                                                { }
+                                            </td>
+                                            <td class="text-center">
+                                                @if (item.User != null)
+                                                {
+                                                    @item.User.PhoneNo
+                                                }
+                                                else
+                                                { }
+                                            </td> 
+                                            <td class="text-center">@item.Remark</td>
+                                            <td class="text-center">@item.OrderTime</td>
+                                            <td class="text-center">@item.PayTime</td>
+                                            <td class="text-center">
+                                            @if (item.PayType == (int)EnumHelp.PayType.微信)
+                                            {
+                                                 @("微信")
+                                            }
+                                            else if (item.PayType == (int)EnumHelp.PayType.支付宝)
+                                            {
+                                                @("支付宝")
+                                            }
+                                            </td>
+                                            <td class="text-center">@item.PaySerialNo</td>
+                                            <td class="text-center">
+                                                @switch (item.PayStatus)
+                                                {
+                                                    case 1:
+                                                        <button type="button" class="btn btn-danger btn-xs">未支付</button>
+                                                        break;
+                                                    case 2:
+                                                        <button type="button" class="btn btn-info btn-xs">已支付</button>
+                                                        break;
+                                                    case 3:
+                                                        <button type="button" class="btn btn-info btn-xs">支付超时</button>
+                                                        break;
+                                                    default:
+                                                        break;
+                                                }
+                                            </td>
+                                            @*<td>
+                                                <a href="/PayDetail/Detail?QueryOrderNo=@item.OrderNo" class="btn btn-info"><i class="fa fa-paste padding-right-4"></i>&nbsp;详情</a>
+                                            </td>*@
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="btn-group">
+                                <a href="/PayDetail/List" class="btn btn-info" style="margin-left:10px;" data-refresh="0"><i class="fa fa-refresh padding-right-4"></i>&nbsp;刷新</a>
+                            </div>
+                            @Html.Raw(Model.Paging.Text)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script{
+    <script src="@("/Scripts/ViewJs/PayDetail/payDetailList.js"+ OrderingSystem.Admin.Versions.Ver)"></script>
+}

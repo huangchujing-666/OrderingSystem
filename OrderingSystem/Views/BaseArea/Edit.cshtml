@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "地区编辑";
+}
+@using OrderingSystem.Domain;
+@model OrderingSystem.Admin.Models.BaseAreaVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        地区编辑 <small>添加、修改</small>
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    <form id="from" class="form-horizontal">
+                        <input type="hidden" class="form-control" name="id" id="id" value="@Model.Area.BaseAreaId">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">地区选择</label>
+                            <div class="col-sm-4">
+                                <select class="form-control inline" style="width:150px;" name="fId" id="fId">
+                                    <option value="1">中国</option>
+                                    @if (Model.Provinces != null && Model.Provinces.Count > 0)
+                                    {
+                                        foreach (var item in Model.Provinces)
+                                        {
+                                            <option @(Model.Area.FId == item.BaseAreaId ? "selected" : "") value="@item.BaseAreaId">@item.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">名称</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" placeholder="请输入城市名称" name="name" id="name" value="@(Model.Area.Name??"")">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button id="btnSave" class="btn btn-primary" type="button">保存内容</button>
+                                <a class="btn btn-white" href="javascript:history.go(-1);">取消</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script{
+    <script src="@("/Scripts/ViewJs/BaseArea/baseAreaEdit.js"+OrderingSystem.Admin.Versions.Ver)"></script>
+}

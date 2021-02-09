@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0447C33D-44D3-4F23-A106-91FAB26CDE64}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OrderingSystem.Business</RootNamespace>
+    <AssemblyName>OrderingSystem.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Appointment\AppointmentBusiness.cs" />
+    <Compile Include="Appointment\IAppointmentBusiness.cs" />
+    <Compile Include="BaseDic\BaseDicBusiness.cs" />
+    <Compile Include="BaseDic\IBaseDicBusiness.cs" />
+    <Compile Include="BaseStation\BaseStationBusiness.cs" />
+    <Compile Include="BaseStation\IBaseStationBusiness.cs" />
+    <Compile Include="BaseImage\BaseImageBusiness.cs" />
+    <Compile Include="BaseImage\IBaseImageBusiness.cs" />
+    <Compile Include="BaseArea\BaseAreaBusiness.cs" />
+    <Compile Include="BaseArea\IBaseAreaBusiness.cs" />
+    <Compile Include="BaseLine\BaseLineBusiness.cs" />
+    <Compile Include="BaseLine\IBaseLineBusiness.cs" />
+    <Compile Include="BusinessEvaluation\BusinessEvaluationBusiness.cs" />
+    <Compile Include="BusinessEvaluation\IBusinessEvaluationBusiness.cs" />
+    <Compile Include="BusinessGroupImage\BusinessGroupImageBusiness.cs" />
+    <Compile Include="BusinessGroupImage\IBusinessGroupImageBusiness.cs" />
+    <Compile Include="BusinessGroup\BusinessGroupBusiness.cs" />
+    <Compile Include="BusinessGroup\IBusinessGroupBusiness.cs" />
+    <Compile Include="BusinessLable\BusinessLableBusiness.cs" />
+    <Compile Include="BusinessLable\IBusinessLableBusiness.cs" />
+    <Compile Include="BusinessPayConfig\BusinessPayConfigBusiness.cs" />
+    <Compile Include="BusinessPayConfig\IBusinessPayConfigBusiness.cs" />
+    <Compile Include="Customer\CustomerBusiness.cs" />
+    <Compile Include="Customer\ICustomerBusiness.cs" />
+    <Compile Include="GoodsImage\GoodsImageBusiness.cs" />
+    <Compile Include="GoodsImage\IGoodsImageBusiness.cs" />
+    <Compile Include="Goods\GoodsBusiness.cs" />
+    <Compile Include="Goods\IGoodsBusiness.cs" />
+    <Compile Include="JpushLog\IJpushLogBusiness.cs" />
+    <Compile Include="JpushLog\JpushLogBusiness.cs" />
+    <Compile Include="RiceDateUser\IRiceDateUserBusiness.cs" />
+    <Compile Include="RiceDateUser\RiceDateUserBusiness.cs" />
+    <Compile Include="RiceDateFeedback\IRiceDateFeedbackBusiness.cs" />
+    <Compile Include="RiceDateFeedback\RiceDateFeedbackBusiness.cs" />
+    <Compile Include="RiceDate\IRiceDateBusiness.cs" />
+    <Compile Include="RiceDate\RiceDateBusiness.cs" />
+    <Compile Include="RoomImage\IRoomImageBusiness.cs" />
+    <Compile Include="RoomImage\RoomImageBusiness.cs" />
+    <Compile Include="TicketRelateTicket\ITicketRelateTicketBusiness.cs" />
+    <Compile Include="TicketRelateTicket\TicketRelateTicketBusiness.cs" />
+    <Compile Include="TicketRelateRoom\TicketRelateRoomBusiness.cs" />
+    <Compile Include="TicketRelateRoom\ITicketRelateRoomBusiness.cs" />
+    <Compile Include="HotelRelateCategory\HotelRelateCategoryBusiness.cs" />
+    <Compile Include="HotelRelateCategory\IHotelRelateCategoryBusiness.cs" />
+    <Compile Include="HotelCategory\HotelCategoryBusiness.cs" />
+    <Compile Include="HotelCategory\IHotelCategoryBusiness.cs" />
+    <Compile Include="OrderStatusLog\IOrderStatusLogBusiness.cs" />
+    <Compile Include="OrderStatusLog\OrderStatusLogBusiness.cs" />
+    <Compile Include="JourneyArticle\IJourneyArticleBusiness.cs" />
+    <Compile Include="JourneyArticle\JourneyArticleBusiness.cs" />
+    <Compile Include="OrderCustomer\IOrderCustomerBusiness.cs" />
+    <Compile Include="OrderCustomer\OrderCustomerBusiness.cs" />
+    <Compile Include="Ticket\ITicketBusiness.cs" />
+    <Compile Include="Ticket\TicketBusiness.cs" />
+    <Compile Include="Room\IRoomBusiness.cs" />
+    <Compile Include="Room\RoomBusiness.cs" />
+    <Compile Include="ProductImage\ProductImageBusiness.cs" />
+    <Compile Include="ProductImage\IProductImageBusiness.cs" />
+    <Compile Include="Product\ProductBusiness.cs" />
+    <Compile Include="Product\IProductBusiness.cs" />
+    <Compile Include="ProductRelateLable\ProductRelateLableBusiness.cs" />
+    <Compile Include="ProductRelateLable\IProductRelateLableBusiness.cs" />
+    <Compile Include="ProductLable\ProductLableBusiness.cs" />
+    <Compile Include="ProductLable\IProductLableBusiness.cs" />
+    <Compile Include="SmsLog\ISmsLogBusiness.cs" />
+    <Compile Include="SmsLog\SmsLogBusiness.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ActivityMinus\IActivityMinusBusiness.cs" />
+    <Compile Include="ActivityMinus\ActivityMinusBusiness.cs" />
+    <Compile Include="Business\IBusinessInfoBusiness.cs" />
+    <Compile Include="Business\BusinessInfoBusiness.cs" />
+    <Compile Include="BusinessBannerImage\IBusinessBannerImageBusiness.cs" />
+    <Compile Include="BusinessBannerImage\BusinessBannerImageBusiness.cs" />
+    <Compile Include="BusinessComment\IBusinessCommentBusiness.cs" />
+    <Compile Include="BusinessComment\BusinessCommentBusiness.cs" />
+    <Compile Include="BusinessImage\IBusinessImageBusiness.cs" />
+    <Compile Include="BusinessImage\BusinessImageBusiness.cs" />
+    <Compile Include="BusinessType\IBusinessTypeBusiness.cs" />
+    <Compile Include="BusinessType\BusinessTypeBusiness.cs" />
+    <Compile Include="CommentImage\ICommentImageBusiness.cs" />
+    <Compile Include="CommentImage\CommentImageBusiness.cs" />
+    <Compile Include="DishesImage\IDishesImageBusiness.cs" />
+    <Compile Include="DishesImage\DishesImageBusiness.cs" />
+    <Compile Include="DishesCategory\IDishesCategoryBusiness.cs" />
+    <Compile Include="DishesCategory\DishesCategoryBusiness.cs" />
+    <Compile Include="Dishes\IDishesBusiness.cs" />
+    <Compile Include="Dishes\DishesBusiness.cs" />
+    <Compile Include="ActivityDiscount\IActivityDiscountBusiness.cs" />
+    <Compile Include="ActivityDiscount\ActivityDiscountBusiness.cs" />
+    <Compile Include="DishesRelateLable\IDishesRelateLableBusiness.cs" />
+    <Compile Include="DishesRelateLable\DishesRelateLableBusiness.cs" />
+    <Compile Include="DishesRelateSpec\IDishesRelateSpecBusiness.cs" />
+    <Compile Include="DishesRelateSpec\DishesRelateSpecBusiness.cs" />
+    <Compile Include="DishesSpec\IDishesSpecBusiness.cs" />
+    <Compile Include="DishesSpec\DishesSpecBusiness.cs" />
+    <Compile Include="DishesSpecDetail\IDishesSpecDetailBusiness.cs" />
+    <Compile Include="DishesSpecDetail\DishesSpecDetailBusiness.cs" />
+    <Compile Include="Level\ILevelBusiness.cs" />
+    <Compile Include="Level\LevelBusiness.cs" />
+    <Compile Include="DishesLable\IDishesLableBusiness.cs" />
+    <Compile Include="DishesLable\DishesLableBusiness.cs" />
+    <Compile Include="OrderDetail\IOrderDetailBusiness.cs" />
+    <Compile Include="OrderDetail\OrderDetailBusiness.cs" />
+    <Compile Include="OrderStatus\IOrderStatusrBusiness.cs" />
+    <Compile Include="OrderStatus\OrderStatusBusiness.cs" />
+    <Compile Include="PayDetail\IPayDetailBusiness.cs" />
+    <Compile Include="PayDetail\PayDetailBusiness.cs" />
+    <Compile Include="RecommendDishes\IRecommendDishesBusiness.cs" />
+    <Compile Include="RecommendDishes\RecommendDishesBusiness.cs" />
+    <Compile Include="Order\IOrderBusiness.cs" />
+    <Compile Include="Order\OrderBusiness.cs" />
+    <Compile Include="SystemLog\ISystemLogBusiness.cs" />
+    <Compile Include="SystemLog\SystemLogBusiness.cs" />
+    <Compile Include="TopSearch\ITopSearchBusiness.cs" />
+    <Compile Include="TopSearch\TopSearchBusiness.cs" />
+    <Compile Include="SysAccount\ISysAccountBusiness.cs" />
+    <Compile Include="SysAccount\SysAccountBusiness.cs" />
+    <Compile Include="SysMenu\ISysMenuBusiness.cs" />
+    <Compile Include="SysMenu\SysMenuBusiness.cs" />
+    <Compile Include="SysRoleMenu\ISysRoleMenuBusiness.cs" />
+    <Compile Include="SysRoleMenu\SysRoleMenuBusiness.cs" />
+    <Compile Include="SysRole\ISysRoleBusiness.cs" />
+    <Compile Include="SysRole\SysRoleBusiness.cs" />
+    <Compile Include="UserLikes\IUserLikesBusiness.cs" />
+    <Compile Include="UserLikes\UserLikesBusiness.cs" />
+    <Compile Include="User\IUserBusiness.cs" />
+    <Compile Include="User\UserBusiness.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\cn.jpush.api\cn.jpush.api.csproj">
+      <Project>{E281D457-F259-4F0B-8608-16C81D8AE97B}</Project>
+      <Name>cn.jpush.api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrderingSystem.Common\OrderingSystem.Common.csproj">
+      <Project>{D6E3D27E-1314-41A0-B7E8-A0D5A00B3805}</Project>
+      <Name>OrderingSystem.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrderingSystem.Core\OrderingSystem.Core.csproj">
+      <Project>{AE4BDEF3-310C-4CF9-9801-BD54917C7C25}</Project>
+      <Name>OrderingSystem.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrderingSystem.Data\OrderingSystem.Data.csproj">
+      <Project>{85C397C4-EB22-4D94-A330-3797ADBF7D8E}</Project>
+      <Name>OrderingSystem.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrderingSystem.Domain\OrderingSystem.Domain.csproj">
+      <Project>{2e886fa0-9939-44bd-b9e3-19f1c29ef69b}</Project>
+      <Name>OrderingSystem.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrderingSystem.IService\OrderingSystem.IService.csproj">
+      <Project>{22E243DB-F244-4856-8776-032941F910DE}</Project>
+      <Name>OrderingSystem.IService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

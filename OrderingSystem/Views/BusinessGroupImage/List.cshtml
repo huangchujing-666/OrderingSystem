@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "商家分组图片列表";
+}
+@model OrderingSystem.Admin.Models.BusinessGroupImageVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    
+                    <div class="row" style="padding:10px 10px;">
+                        <form action="/BusinessInfo/List" method="get">
+                            <div class="col-sm-4">
+                                分组名称：@Model.BusinessGroup.Name 
+                            </div>
+                            
+                        </form>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">序号</th>
+                                    <th class="text-center">分组名称</th>
+                                    <th class="text-center">图片</th>
+                                    <th class="text-center">图片类型</th>
+                                    <th class="text-center">创建时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Paging.Items != null && Model.Paging.Items.Count > 0)
+                                {
+                                    foreach (var item in Model.Paging.Items)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@item.BusinessGroupImageId</td>
+                                            <td class="text-center">@item.BusinessGroup.Name</td>
+                                            <td class="text-center">@item.BaseImageId</td>
+                                            <td class="text-center">
+                                                @if (item.Type == 1)
+                                                {
+                                                    @("未选中图片")
+                                                }
+                                                @if (item.Type == 2)
+                                                {
+                                                    @("选中图片")
+                                                }
+
+                                            </td>
+
+                                            <td class="text-center">@item.CreateTime</td>
+                                            <td>
+                                                <a href="/BusinessGroupImage/Edit?id=@item.BusinessGroupImageId&v=0" class="btn btn-info"><i class="fa fa-paste padding-right-4"></i>&nbsp;编辑</a>
+
+                                                <button onclick="del('/BusinessGroupImage/Delete','/BusinessGroupImage/List','@item.BusinessGroupImageId')" class="btn btn-danger"><i class="fa fa-times padding-right-4"></i>&nbsp;删除</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="btn-group">
+                                <a href="/BusinessGroupImage/Edit?GroupId=@Model.Id" class="btn btn-info" data-refresh="0"><i class="fa fa-plus padding-right-4"></i>&nbsp;添加</a>
+                                <a href="/BusinessGroupImage/List?Id=@Model.Id" class="btn btn-info" style="margin-left:10px;" data-refresh="0"><i class="fa fa-refresh padding-right-4"></i>&nbsp;刷新</a>
+                            </div>
+                            @Html.Raw(Model.Paging.Text)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

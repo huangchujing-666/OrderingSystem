@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "城市列表";
+}
+@using OrderingSystem.Domain;
+@model OrderingSystem.Admin.Models.BaseAreaVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">序号</th>
+                                    <th class="text-center">名称</th>
+                                    <th class="text-center">等级</th>
+                                    <th class="text-center">状态</th>
+                                    <th class="text-center">创建时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Paging.Items != null && Model.Paging.Items.Count > 0)
+                                {
+                                    foreach (var item in Model.Paging.Items)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@item.BaseAreaId</td>
+                                            <td class="text-center">@item.Name</td>
+                                            <td class="text-center">@(item.Grade == 2 ? "市" : "")</td>
+                                            <td class="text-center">
+                                                @if (item.Status == 0)
+                                                {
+                                                    <span class="label label-danger">无效</span>
+                                                }
+                                                @if (item.Status == 1)
+                                                {
+                                                    <span class="label label-info">有效</span>
+                                                }
+                                            </td>
+                                            <td class="text-center">@item.CreateTime</td>
+                                            <td>
+                                                <a href="/BaseArea/Edit/@item.BaseAreaId" class="btn btn-info"><i class="fa fa-paste padding-right-4"></i>&nbsp;编辑</a>
+                                                @if (item.Status == 0)
+                                                {
+                                                    <button onclick="enable('/BaseArea/UpdateStatus','/BaseArea/CityList/@Model.Id','@item.BaseAreaId','@((int)EnumHelp.EnabledEnum.有效)')" class="btn btn-primary"><i class="fa fa-check padding-right-4"></i>&nbsp;启用</button>
+                                                }
+                                                @if (item.Status == 1)
+                                                {
+                                                    <button onclick="disable('/BaseArea/UpdateStatus','/BaseArea/CityList/@Model.Id','@item.BaseAreaId','@((int)EnumHelp.EnabledEnum.无效)')" class="btn btn-warning"><i class="fa fa-warning padding-right-4"></i>&nbsp;禁用</button>
+                                                }
+                                                <button onclick="del('/BaseArea/Delete','/BaseArea/CityList/@Model.Id','@item.BaseAreaId')" class="btn btn-danger"><i class="fa fa-times padding-right-4"></i>&nbsp;删除</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="btn-group">
+                                <a href="/BaseArea/CityList/@Model.Id" class="btn btn-info" style="margin-left:10px;" data-refresh="0"><i class="fa fa-refresh padding-right-4"></i>&nbsp;刷新</a>
+                            </div>
+                            @Html.Raw(Model.Paging.Text)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

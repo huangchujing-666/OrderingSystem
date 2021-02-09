@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "短信日志列表";
+}
+@model OrderingSystem.Admin.Models.SmsLogVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="row" style="padding:10px 10px;">
+                        <form action="/SmsLog/List" method="get">
+                            <div class="col-sm-4">
+                                电话：
+                                <input type="text" name="QueryName" class="form-control inline" style="width:70%;" placeholder="请输入查询电话" value="@(Model.QueryName ?? "")">
+                            </div>
+                            <button type="submit" class="btn btn-info">搜索</button>
+                        </form>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">序号</th>
+                                    <th class="text-center">电话</th>
+                                    <th class="text-center">验证码</th>
+                                    <th class="text-center">备注</th>
+                                    <th class="text-center">模块</th>
+                                    <th class="text-center">创建时间</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Paging.Items != null && Model.Paging.Items.Count > 0)
+                                {
+                                    foreach (var item in Model.Paging.Items)
+                                    {
+                                    <tr>
+                                        <td class="text-center">@item.SmsLogId</td>
+                                        <td class="text-center">@item.Phone</td>
+                                        <td class="text-center">@item.Code</td>
+                                        <td class="text-center">@item.Remark</td>
+                                        <td class="text-center">@item.Module</td>
+                                        <td class="text-center">@item.CreateTime</td>
+                                    </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="btn-group">
+                                <a href="/SmsLog/List" class="btn btn-info" style="margin-left:10px;" data-refresh="0"><i class="fa fa-refresh padding-right-4"></i>&nbsp;刷新</a>
+                            </div>
+                            @Html.Raw(Model.Paging.Text)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

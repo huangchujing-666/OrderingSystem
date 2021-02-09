@@ -1,0 +1,219 @@
+﻿@{
+    ViewBag.Title = "折扣满减编辑";
+}
+@section head{
+    <style type="text/css">
+        .dinningSupprtTime .list-group-item {
+            margin: 5px;
+        }
+
+            .dinningSupprtTime .list-group-item i {
+                float: right;
+                color: #FFFFFF;
+            }
+    </style>
+}
+@model OrderingSystem.Admin.Models.ActivityDiscountVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        折扣满减编辑 <small>添加、修改</small>
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                 
+                        <div class="hr-line-dashed"></div>
+                    <form id="from" class="form-horizontal" action="/Dishes/DishesSeting">
+                        <div class="form-group">
+                            <label class="col-sm-2">折扣配置</label>
+                            <div class="col-sm-4">
+                                <input type="radio" id="radNonSupport" name="radSupport" value="0" />
+                                <label for="radNonSupport" style="cursor:pointer;">不支持折扣</label>
+                                <label style="margin-left:10px;"></label>
+                                <input type="radio" id="radSupport" name="radSupport" checked="checked" value="1" />
+                                <label for="radSupport" style="cursor:pointer;">支持折扣</label>
+                                <input type="hidden" id="hidSupportStatus" value="@(Model.IsSupport)" />
+                                <input type="hidden" id="Id" value="@(Model.ActivityDiscount.ActivityDiscountId)" />
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div id="div_DinningTime" class="dinningSupprtTime" style="display:none;">
+                            <div class="form-group">
+                                <label class="col-sm-2">支持折扣</label>
+                                <div class="col-sm-2">
+                                    <input type="number" id="discount" class="form-control" name="discount" value="@(Model.ActivityDiscount!=null?Model.ActivityDiscount.Discount:1)" />
+                                </div>
+                                <button id="btnSave" class="btn btn-primary" type="button">保存折扣</button><label class="red-line">(输入0.01至1以内的数字，如：0.75代表75折，1代表不打折)</label>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                        </div>
+                        </form>
+                      
+                      
+                        <div class="form-group">
+                            <label class="col-sm-2">满减配置</label> <br>
+                            <div class="col-sm-12">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-content">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center">序号</th>
+                                                        <th class="text-center">满足金额</th>
+                                                        <th class="text-center">优惠金额</th>
+                                                        <th class="text-center">状态</th>
+                                                        <th class="text-center">创建时间</th>
+                                                        <th>操作</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @if (Model.ActivityMinusList != null && Model.ActivityMinusList.Count > 0)
+                                                    {
+                                                        foreach (var item in Model.ActivityMinusList)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-center">@item.ActivityMinusId</td>
+                                                                <td class="text-center">@item.AchiveAmount</td>
+                                                                <td class="text-center">@(item.MinusAmount)</td>
+                                                                <td class="text-center">
+                                                                    @if (item.Status == 0)
+                                                                    {
+                                                                        <span class="label label-danger">无效</span>
+                                                                    }
+                                                                    @if (item.Status == 1)
+                                                                    {
+                                                                        <span class="label label-info">有效</span>
+                                                                    }
+                                                                </td>
+                                                                <td class="text-center">@item.CreateTime</td>
+                                                                <td>
+                                                                    <button onclick="iframe('编辑','/ActivityMinus/Edit/@item.ActivityMinusId?ActivityMinusId=@item.ActivityMinusId')" class="btn btn-success">编辑</button>
+                                                                    @*<a href="/ActivityMinus/Edit/@item.ActivityMinusId?ActivityMinusId=@item.ActivityMinusId" class="btn btn-info"><i class="fa fa-paste padding-right-4"></i>&nbsp;编辑</a>*@
+                                                                    <button onclick="del('/ActivityMinus/Delete?ActivityMinusId=@item.ActivityMinusId','/Business/Discount','@item.ActivityMinusId')" class="btn btn-danger"><i class="fa fa-times padding-right-4"></i>&nbsp;删除</button>
+                                                                    @*<button onclick="del('/ActivityManjian/Delete','/ActivityDiscount/ManJianList/@Model.Id','@item.Id')" class="btn btn-danger"><i class="fa fa-times padding-right-4"></i>&nbsp;删除</button>*@
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="btn-group">
+                                                    <button onclick="iframe('添加','/ActivityMinus/Edit')" class="btn btn-success">添加</button>
+                                                    @*<a href="/ActivityMinus/Edit" class="btn btn-info" data-refresh="0"><i class="fa fa-plus padding-right-4"></i>&nbsp;添加</a>*@
+                                                    <a href="/Business/Discount" class="btn btn-info" style="margin-left:10px;" data-refresh="0"><i class="fa fa-refresh padding-right-4"></i>&nbsp;刷新</a>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+               
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script{
+    @*<script src="@("/Scripts/ViewJs/BusinessDelivery/businessDeliveryEdit.js"+Versions.Ver)"></script>*@
+    <script type="text/javascript">
+        $(function () {
+            //点击单选按钮，切换效果
+            $("#radNonSupport").click(function () {
+                $("#div_DinningTime").hide();
+                $("#discount").val(0);
+                if (@(Model.ActivityDiscount.ActivityDiscountId)>0) {
+                    //不支持，删除配置
+                    $.post('/ActivityDiscount/Delete?id=@(Model.ActivityDiscount.ActivityDiscountId)', function (data) {
+                        if (data.Status == 200) {
+                            $("#Id").val(0);
+                            swal("提示", "取消折扣成功");
+                        }
+                        if (data.Status == 202) {
+                            swal("提示", "操作失败");
+                        }
+                        if (data.Status == 203) {
+                            swal("提示", "数据重复");
+                        }
+                    }).complete(function () { });
+
+                }
+            })
+
+            $("#radSupport").click(function () {
+                $("#div_DinningTime").show();
+            })
+
+
+            var hidSupportStatus = $("#hidSupportStatus").val();
+
+            if (hidSupportStatus == "0") {
+                $("#div_DinningTime").hide();
+                $("#radNonSupport").attr("checked", true);
+
+            } else if (hidSupportStatus == "1") {
+                $("#div_DinningTime").show();
+                $("#radSupport").attr("checked", true);
+            } else {
+                $("#div_DinningTime").hide();
+                $("#radNonSupport").attr("checked", true);
+            }
+
+            //配送时间选项点击效果
+            var bindClickAnimate = function () {
+                $(".list-group a").click(function () {
+                    $(this).toggleClass("active")
+                });
+            }
+            bindClickAnimate();
+
+
+            var bindSaveEvent = function () {
+                $("#btnSave").click(function () {
+                    if ($("#discount").val() <= 0 || $("#discount").val() > 1)
+                    {
+                        swal("提示", "请输入0.01-1的折扣");
+                        return;
+                    }
+                    var dataArr = {
+                        ActivityDiscountId: $("#Id").val(),
+                        Discount: $("#discount").val(),
+                    };
+                    //判断当选中可以订座时，如果没有选中可订座时间，则返回提示信息。
+                    if ($('input:radio:checked').val() == "1" && $("#discount").val() == "") {
+                        swal("提示", "请输入折扣");
+                        return;
+                    }
+
+                    window.parent.showModal();
+                    //提交
+                    $.post('/Business/Edit', dataArr, function (data) {
+                        if (data.Status == 200) {
+                            swal("提示", "操作成功");
+                            setTimeout(function () {
+                                window.location.href = location.href;
+                            }, 1500);
+                        }
+                        if (data.Status == 202) {
+                            swal("提示", "操作失败");
+                        }
+                        if (data.Status == 203) {
+                            swal("提示", "数据重复");
+                        }
+                    }).complete(function () { window.parent.hideModal(); });
+                })
+            }
+            bindSaveEvent();
+        })
+
+    </script>
+}

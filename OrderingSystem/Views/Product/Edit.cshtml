@@ -1,0 +1,228 @@
+﻿@{
+    ViewBag.Title = "产品编辑";
+}
+@using OrderingSystem.Admin.Common;
+@using System.Data.SqlTypes;
+@model OrderingSystem.Admin.Models.ProductVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox-content">
+        <div class="ibox-title">
+            <h5>
+                产品编辑 <small> 添加、修改</small>
+            </h5>
+        </div>
+    </div>
+    <div class="col-sm-12">
+
+        <div class="panel-body">
+            <form class="form-horizontal">
+                <div id="divImgIdHid"></div>
+                <input type="hidden" class="form-control" name="id" id="id" value="@Model.Product.ProductId">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">商家</label>
+                    <div class="col-sm-4">
+                        @*@if (Model.Product.ProductId > 0)
+                        {*@
+                            <select class="form-control" name="businessmanId" id="businessmanId" @(int.Parse(Loginer.BusinessId)>0?"disabled":"")>
+                                <option value="0">请选择餐厅</option>
+                                @if (Model.BusinessList != null && Model.BusinessList.Count > 0)
+                                {
+                                    foreach (var item in Model.BusinessList)
+                                    {
+                                        <option @(Model.Product.BusinessInfoId == item.BusinessInfoId ? "selected" : "" ) value="@item.BusinessInfoId">@item.Name</option>
+                                    }
+                                }
+                            </select>
+                        @*}
+                        else
+                        {
+                            <select id="businessmanIds" name="businessmanIds" class="selectpicker show-tick form-control" multiple data-live-search="false" data-dropup-auto="false">
+                                @if (Model.BusinessList != null && Model.BusinessList.Count > 0)
+                                {
+                                    foreach (var item in Model.BusinessList)
+                                    {
+                                        <option value="@item.BusinessInfoId">@item.Name</option>
+                                    }
+                                }
+                            </select>
+                        }*@
+                    </div><label class="red-line">*</label>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">产品名称</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" placeholder="请输入产品名称" maxlength="100" name="name" id="name" value="@(!string.IsNullOrWhiteSpace(Model.Product.Name)?Model.Product.Name:" ")">
+                    </div><label class="red-line">*</label>
+                </div>
+                <div class="hr-line-dashed"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">原价</label>
+                    <div class="col-sm-4">
+                        <input type="number" class="form-control" placeholder="请输入产品价格" name="orignPrice" id="orignPrice" value="@Model.Product.OrignPrice" onblur="priceOnblus()">
+                    </div><label class="red-line">*</label>
+                </div>
+                <div class="hr-line-dashed"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">优惠价格</label>
+                    <div class="col-sm-4">
+                        <input type="number" class="form-control" placeholder="请输入产品优惠价格" name="realPrice" id="realPrice" value="@(Model.Product.RealPrice)">
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div> 
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">产品有效期</label>
+                    <div class="col-sm-4">
+                        <input placeholder="开始日期" class="form-control layer-date" id="StartDate" name="StartDate" style="vertical-align:middle;width:180px;" value="@(Model.Product.StartDate <=new DateTime(1900,1,1) ? "": Model.Product.StartDate.ToString("yyyy-MM-dd HH:mm:ss"))">
+                        <input placeholder="结束日期" class="form-control layer-date" id="EndDate" name="EndDate" style="vertical-align:middle;width:180px;" value="@(Model.Product.EndDate <= new DateTime(1900,1,1) ? "": Model.Product.EndDate.ToString("yyyy-MM-dd HH:mm:ss"))">
+                        <label>
+                        <input type="checkbox" class="" name="nolimite" id="nolimite" @(Model.Product.UseDateLimit==1 ? "checked": "")/>无限期</label> 
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">产品描述</label>
+                    <div class="col-sm-4">
+                        <textarea id="description" maxlength="30" class="form-control" style="height:60px;" name="description">@Model.Product.Descript</textarea>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">产品详情</label>
+                    <div class="col-sm-4">
+                        <textarea id="content" class="form-control" style="height:60px;" name="content">@Model.Product.Content</textarea>
+                    </div>
+                </div> 
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">产品备注</label>
+                    <div class="col-sm-4">
+                        <textarea id="remark" class="form-control" style="height:60px;" name="remark">@Model.Product.Remark</textarea>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">购买须知</label>
+                    <div class="col-sm-4">
+                        <textarea id="notice" class="form-control" style="height:60px;" name="notice">@Model.Product.Notice</textarea>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">使用规则</label>
+                    <div class="col-sm-4">
+                        <textarea id="rules" class="form-control" style="height:60px;" name="rules">@Model.Product.Rules</textarea>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>  
+                  
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <button id="btnSave" class="btn btn-primary" type="button">保存内容</button>
+                        <a class="btn btn-white" href="javascript:history.go(-1);">取消</a>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+
+    </div>
+</div>
+@section script{
+    <script src="@("/Scripts/plugins/fileinput/fileinput.js"+OrderingSystem.Admin.Versions.Ver)"></script>
+    <script src="@("/Scripts/plugins/fileinput/zh.js"+OrderingSystem.Admin.Versions.Ver)"></script>
+    <script src="@("/Scripts/ViewJs/Product/ProductEdit.js"+OrderingSystem.Admin.Versions.Ver)"></script>
+    <script type="text/javascript">
+        //日期范围限制
+        var start = {
+            elem: '#StartDate',
+            format: 'YYYY-MM-DD hh:mm:ss',
+            //min: laydate.now(), //设定最小日期为当前日期
+            max: '2099-06-16 23:59:59', //最大日期
+            istime: true,
+            istoday: false,
+            choose: function (datas) {
+                end.min = datas; //开始日选好后，重置结束日的最小日期
+                end.start = datas //将结束日的初始值设定为开始日
+            }
+        };
+        var end = {
+            elem: '#EndDate',
+            format: 'YYYY-MM-DD hh:mm:ss',
+            //min: laydate.now(),
+            max: '2099-06-16 23:59:59',
+            istime: true,
+            istoday: false,
+            choose: function (datas) {
+                start.max = datas; //结束日选好后，重置开始日的最大日期
+            }
+        };
+        laydate(start);
+        laydate(end);
+
+
+        $('#divImgIdHid').empty();
+        $(function () {
+            //初始多选下拉框
+            @*var feature = '@Model.Product.AttributeId';
+            var featureArr = feature.split(',');
+            $('#feature').selectpicker('val', featureArr);
+
+            var attids = "@Model.Product.AttributeId";
+            var nutritionIds = "@Model.Product.NutritionId";
+            $('#attributeId').selectpicker('val', attids.split(','));
+            $('#nutritionId').selectpicker('val', nutritionIds.split(','));*@
+
+            //初始化编辑器js
+            @*var editor = new baidu.editor.ui.Editor({
+                UEDITOR_HOME_URL: '/Scripts/ueditor/',//配置编辑器路径
+                iframeCssUrl: '/Scripts/ueditor/themes/iframe.css',//样式路径
+                initialContent: '@Html.Raw(Model.Product.Describes)',//初始化编辑器内容
+                autoHeightEnabled: true,//高度自动增长
+                minFrameHeight: 720//最小高度
+            });
+            editor.render('description');*@
+
+            @*//产品封面图
+            var img = [];
+            if ('@Model.ImgInfo.Path' != '') {
+                var str = '<img src="@(Model.ImgInfo.Source + Model.ImgInfo.Path)" class="kv-preview-thumb kv-file-content file-preview-image" />';
+                img.push(str);
+            }
+            $('#filename').fileinput({
+                language: 'zh',
+                allowedFileTypes: ['image'],
+                allowedFileExtensions: ['jpg', 'png', 'gif'],
+                uploadUrl: '/Uploader/ImgFile?folder=Product&title=产品缩略图',
+                showUpload: false,  //是否显示上传按钮
+                showRemove: true,   //显示移除按钮
+                maxFileSize: 2000,
+                showCaption: true,  //是否显示标题
+                maxFileCount: 1,    //表示允许同时上传的最大文件个数
+                maxFileSize: 1024,   //单位为kb，如果为0表示不限制文件大小
+                initialPreview: img,
+                dropZoneTitle: '请选择需要上传的图片（800px*800px）',
+            });
+            //上传成功回调事件
+            $("#filename").on("fileuploaded", function (event, data, previewId, index) {
+                $('#imgInfoId').val(data.response);
+            });
+            //移除事件
+            $("#filename").on("fileclear", function (event, data, previewId, index) {
+                $.post("/Uploader/DeleteFile", { Id: $('#imgInfoId').val() }, function (data) { });
+                $('#imgInfoId').val("0");
+            });*@
+
+
+        });
+
+
+        function priceOnblus() { 
+            $("#realPrice").val($("#orignPrice").val()); 
+        }
+    </script>
+}
+

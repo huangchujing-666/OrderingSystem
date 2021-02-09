@@ -1,0 +1,154 @@
+﻿@{
+    ViewBag.Title = "票务编辑";
+}
+@using OrderingSystem.Admin.Common;
+@using System.Data.SqlTypes;
+@model OrderingSystem.Admin.Models.TicketVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox-content">
+        <div class="ibox-title">
+            <h5>
+                票务编辑 <small> 添加、修改</small>
+            </h5>
+        </div>
+    </div>
+    <div class="col-sm-12">
+
+        <div class="panel-body">
+            <form class="form-horizontal">
+                <div id="divImgIdHid"></div>
+                <input type="hidden" class="form-control" name="id" id="id" value="@Model.Ticket.TicketId">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">景点名称</label>
+                    <div class="col-sm-4">
+                        @*@if (Model.Ticket.TicketId > 0)
+                        {*@
+                            <select class="form-control" name="businessmanId" id="businessmanId" @(int.Parse(Loginer.BusinessId)>0?"disabled":"")>
+                                <option value="0">请选择景点</option>
+                                @if (Model.BusinessList != null && Model.BusinessList.Count > 0)
+                                {
+                                    foreach (var item in Model.BusinessList)
+                                    {
+                                        <option @(Model.Ticket.BusinessInfoId == item.BusinessInfoId ? "selected" : "" ) value="@item.BusinessInfoId">@item.Name</option>
+                                    }
+                                }
+                            </select>
+                        @*}
+                        else
+                        {
+                            <select id="businessmanIds" name="businessmanIds" class="selectpicker show-tick form-control" multiple data-live-search="false" data-dropup-auto="false">
+                                @if (Model.BusinessList != null && Model.BusinessList.Count > 0)
+                                {
+                                    foreach (var item in Model.BusinessList)
+                                    {
+                                        <option value="@item.BusinessInfoId">@item.Name</option>
+                                    }
+                                }
+                            </select>
+                        }*@
+                    </div><label class="red-line">*</label>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">票务名称</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" placeholder="请输入票务名称" maxlength="100" name="name" id="name" value="@(!string.IsNullOrWhiteSpace(Model.Ticket.Name)?Model.Ticket.Name:" ")">
+                    </div><label class="red-line">*</label>
+                </div>
+                <div class="hr-line-dashed"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">原价</label>
+                    <div class="col-sm-4">
+                        <input type="number" class="form-control" placeholder="请输入票务价格" name="orignPrice" id="orignPrice" value="@Model.Ticket.OrignPrice" onblur="priceOnblus()">
+                    </div><label class="red-line">*</label>
+                </div>
+                <div class="hr-line-dashed"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">优惠价格</label>
+                    <div class="col-sm-4">
+                        <input type="number" class="form-control" placeholder="请输入票务优惠价格" name="realPrice" id="realPrice" value="@(Model.Ticket.RealPrice)">
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div> 
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">是否需要绑定用户信息</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" name="bindCard" id="bindCard" >
+                            <option @(Model.Ticket.BindCard == 0 ? "selected" : "" ) value="0">不需要</option>
+                            <option @(Model.Ticket.BindCard == 1 ? "selected" : "" ) value="1">需要</option>
+                           
+                        </select>
+
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div> 
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">使用人数</label>
+                    <div class="col-sm-4">
+                        <input type="number" class="form-control" placeholder="请输入使用人数" name="useCount" id="useCount" value="@(Model.Ticket.UseCount)">
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div> 
+               
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">产品特色</label>
+                    <div class="col-sm-4">
+                        <textarea id="special" maxlength="30" class="form-control" style="height:60px;" name="special">@Model.Ticket.Special</textarea>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div> 
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">门票备注</label>
+                    <div class="col-sm-4">
+                        <textarea id="remark" class="form-control" style="height:60px;" name="remark">@Model.Ticket.Remark</textarea>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">取消说明</label>
+                    <div class="col-sm-4">
+                        <textarea id="notice" class="form-control" style="height:60px;" name="notice">@Model.Ticket.Notice</textarea>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">使用说明</label>
+                    <div class="col-sm-4">
+                        <textarea name="rules" id="rules"></textarea>
+                        @*<textarea id="rules" class="form-control" style="height:60px;" name="rules">@Model.Ticket.Rules</textarea>*@
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>  
+                  
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <button id="btnSave" class="btn btn-primary" type="button">保存内容</button>
+                        <a class="btn btn-white" href="javascript:history.go(-1);">取消</a>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+
+    </div>
+</div>
+@section script{
+    <script src="@("/Scripts/plugins/fileinput/fileinput.js"+OrderingSystem.Admin.Versions.Ver)"></script>
+    <script src="@("/Scripts/plugins/fileinput/zh.js"+OrderingSystem.Admin.Versions.Ver)"></script>
+    <script src="@("/Scripts/ViewJs/Ticket/TicketEdit.js"+OrderingSystem.Admin.Versions.Ver)"></script>
+    <script type="text/javascript">
+
+        //初始化编辑器
+        initEditor('@Html.Raw(Model.Ticket.Rules)', 'rules');
+         
+        function priceOnblus() { 
+            $("#realPrice").val($("#orignPrice").val()); 
+        }
+    </script>
+}
+

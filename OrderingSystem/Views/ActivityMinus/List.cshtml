@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "满减列表";
+}
+@model OrderingSystem.Admin.Models.ActivityMinusVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">序号</th>
+                                    <th class="text-center">满足金额</th>
+                                    <th class="text-center">优惠金额</th>
+                                    <th class="text-center">创建时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Paging.Items != null && Model.Paging.Items.Count > 0)
+                                {
+                                    foreach (var item in Model.Paging.Items)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@item.ActivityMinusId</td>
+                                            <td class="text-center">@item.AchiveAmount</td>
+                                            <td class="text-center">@(item.MinusAmount)</td>
+                                            <td class="text-center">@item.CreateTime</td>
+                                            <td>
+                                                <a href="/ActivityMinus/Edit?ActivityMinusId=@item.ActivityMinusId" class="btn btn-info"><i class="fa fa-paste padding-right-4"></i>&nbsp;编辑</a>
+                                                @*@if (item.Status == 0)
+                                                    {
+                                                        <button onclick="enable('/ActivityManjian/UpdateStatus','/ActivityDiscount/ManJianList/@Model.Id','@item.Id','@((int)LOT.Model.StatusEnum.有效)')" class="btn btn-primary"><i class="fa fa-check padding-right-4"></i>&nbsp;启用</button>
+                                                    }
+                                                    @if (item.Status == 1)
+                                                    {
+                                                        <button onclick="disable('/ActivityManjian/UpdateStatus','/ActivityDiscount/ManJianList/@Model.Id','@item.Id','@((int)LOT.Model.StatusEnum.无效)')" class="btn btn-warning"><i class="fa fa-warning padding-right-4"></i>&nbsp;禁用</button>
+                                                    }*@
+                                                <button onclick="del('/ActivityMinus/Delete?ActivityMinusId=@item.ActivityMinusId','/ActivityMinus/List?ActivityMinusId=@Model.ActivityMinusId','@item.ActivityMinusId')" class="btn btn-danger"><i class="fa fa-times padding-right-4"></i>&nbsp;删除</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="btn-group">
+                                <a href="/ActivityMinus/Edit?BusinessInfoId=@Model.BusinessInfoId" class="btn btn-info" data-refresh="0"><i class="fa fa-plus padding-right-4"></i>&nbsp;添加</a>
+                                <a href="/ActivityMinus/List?BusinessInfoId=@Model.BusinessInfoId" class="btn btn-info" style="margin-left:10px;" data-refresh="0"><i class="fa fa-refresh padding-right-4"></i>&nbsp;刷新</a>
+                            </div>
+                            @Html.Raw(Model.Paging.Text)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

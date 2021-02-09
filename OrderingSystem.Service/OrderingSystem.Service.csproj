@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{16C2DB5D-9663-498A-8FA4-F23857F413CB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OrderingSystem.Service</RootNamespace>
+    <AssemblyName>OrderingSystem.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="OSS.Common">
+      <HintPath>..\lib\OSS.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseAreaService.cs" />
+    <Compile Include="AppointmentService.cs" />
+    <Compile Include="BaseDicService.cs" />
+    <Compile Include="BaseStationService.cs" />
+    <Compile Include="BaseLineService.cs" />
+    <Compile Include="BusinessEvaluationService.cs" />
+    <Compile Include="BusinessGroupImageService.cs" />
+    <Compile Include="BusinessPayConfigService.cs" />
+    <Compile Include="BusinessLableService.cs" />
+    <Compile Include="CustomerService.cs" />
+    <Compile Include="GoodsService.cs" />
+    <Compile Include="GoodsImageService.cs" />
+    <Compile Include="JpushLogService.cs" />
+    <Compile Include="RiceDateService.cs" />
+    <Compile Include="RiceDateFeedbackService.cs" />
+    <Compile Include="RiceDateUserService.cs" />
+    <Compile Include="RoomImageService.cs" />
+    <Compile Include="TicketRelateRoomService.cs" />
+    <Compile Include="TicketRelateTicketService.cs" />
+    <Compile Include="JourneyArticleService.cs" />
+    <Compile Include="OrderCustomerService.cs" />
+    <Compile Include="TicketService.cs" />
+    <Compile Include="HotelRelateCategoryService.cs" />
+    <Compile Include="HotelCategoryService.cs" />
+    <Compile Include="OrderStatusLogService.cs" />
+    <Compile Include="ProductImageService.cs" />
+    <Compile Include="RoomService.cs" />
+    <Compile Include="ProductService.cs" />
+    <Compile Include="ProductRelateLableService.cs" />
+    <Compile Include="ProductLableService.cs" />
+    <Compile Include="BusinessGroupService.cs" />
+    <Compile Include="SmsLogService.cs" />
+    <Compile Include="TopSearchService.cs" />
+    <Compile Include="BaseImageService.cs" />
+    <Compile Include="BusinessBannerImageService.cs" />
+    <Compile Include="BusinessCommentService.cs" />
+    <Compile Include="BusinessImageService.cs" />
+    <Compile Include="BusinessInfoService.cs" />
+    <Compile Include="BusinessTypeService.cs" />
+    <Compile Include="CommentImageService.cs" />
+    <Compile Include="DishesService.cs" />
+    <Compile Include="DishesCategoryService.cs" />
+    <Compile Include="DishesImageService.cs" />
+    <Compile Include="DishesLableService.cs" />
+    <Compile Include="DishesRelateLableService.cs" />
+    <Compile Include="DishesRelateSpecService.cs" />
+    <Compile Include="DishesSpecService.cs" />
+    <Compile Include="DishesSpecDetailService.cs" />
+    <Compile Include="LevelService.cs" />
+    <Compile Include="OrderService.cs" />
+    <Compile Include="OrderDetailService.cs" />
+    <Compile Include="OrderStatusService.cs" />
+    <Compile Include="PayDetailService.cs" />
+    <Compile Include="RecommendDishesService.cs" />
+    <Compile Include="SystemLogService.cs" />
+    <Compile Include="ActivityMinusService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ActivityDiscountService.cs" />
+    <Compile Include="SysRoleService.cs" />
+    <Compile Include="SysRoleMenuService.cs" />
+    <Compile Include="SysMenuService.cs" />
+    <Compile Include="SysAccountService.cs" />
+    <Compile Include="UserLikesService.cs" />
+    <Compile Include="UserService.cs" />
+    <Compile Include="WXPayService.cs" />
+    <Compile Include="ZFBPayService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LOT.WX\OrderingSystem.WX.csproj">
+      <Project>{1601A030-1093-408A-BD27-9A29BBF10F8E}</Project>
+      <Name>OrderingSystem.WX</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LOT.ZFB\OrderingSystem.ZFB.csproj">
+      <Project>{3B2573EF-DCAE-429B-9923-C2BFCC6C10AA}</Project>
+      <Name>OrderingSystem.ZFB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrderingSystem.Business\OrderingSystem.Business.csproj">
+      <Project>{0447C33D-44D3-4F23-A106-91FAB26CDE64}</Project>
+      <Name>OrderingSystem.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrderingSystem.Core\OrderingSystem.Core.csproj">
+      <Project>{AE4BDEF3-310C-4CF9-9801-BD54917C7C25}</Project>
+      <Name>OrderingSystem.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrderingSystem.Domain\OrderingSystem.Domain.csproj">
+      <Project>{2E886FA0-9939-44BD-B9E3-19F1C29EF69B}</Project>
+      <Name>OrderingSystem.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrderingSystem.IService\OrderingSystem.IService.csproj">
+      <Project>{22e243db-f244-4856-8776-032941f910de}</Project>
+      <Name>OrderingSystem.IService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "订单详情";
+}
+@model OrderingSystem.Admin.Models.OrderVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="wrapper wrapper-content animated fadeInUp">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="m-b-md">
+                                    <a href="javascript:history.go(-1);" class="btn btn-info pull-right">关闭</a>
+                                </div>
+                                <dl class="dl-horizontal">
+                                    <dt>状态：</dt>
+                                    <dd>
+                                        @switch (Model.Order.OrderStatusId)
+                                        {
+                                            case 1:
+                                                <button type="button" class="btn btn-danger btn-xs">未付款</button>
+                                                break;
+                                            case 2:
+                                                <button type="button" class="btn btn-info btn-xs">已付款</button>
+                                                break;
+                                            case 3:
+                                                <button type="button" class="btn btn-warning btn-xs">已取消</button>
+                                                break;
+                                            case 4:
+                                                <button type="button" class="btn btn-primary btn-xs">退款中</button>
+                                                break;
+                                            case 5:
+                                                <button type="button" class="btn btn-success btn-xs">已退款</button>
+                                                break;
+                                            case 6:
+                                                <button type="button" style="background-color:#FF9900;color: #FFFFFF;border-color: #FF9900;" class="btn btn-xs">退款失败</button>
+                                                break;
+                                            case 7:
+                                                <button type="button" style="background-color:#FFCC00;color: #FFFFFF;border-color: #FFCC00;" class="btn btn-xs">已完结</button>
+                                                break;
+                                            case 8:
+                                                <button type="button" style="background-color:#0033FF;color: #FFFFFF;border-color: #0033FF;" class="btn btn-xs">已结算</button>
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <dl class="dl-horizontal">
+                                    <dt>订单编号：</dt>
+                                    <dd>@Model.Order.OrderNo</dd>
+                                    <dt>商家名称：</dt>
+                                    <dd>@Model.Order.BusinessInfo.Name</dd>
+                                    <dt>总金额：</dt>
+                                    <dd>@Model.Order.RealAmount</dd>
+                                </dl>
+                            </div>
+                            <div class="col-sm-7" id="cluster_info">
+                                <dl class="dl-horizontal" style="word-break:break-all;">
+                                    <dt>下单人：</dt>
+                                    <dd>@Model.Order.User.NickName</dd>
+                                    <dt>下单时间：</dt>
+                                    <dd>@Model.Order.OrderTime</dd>
+                                    <dt>描述：</dt>
+                                    <dd>
+                                        @Model.Order.Remark
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="row m-t-sm">
+                            <div class="col-sm-12">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>订单编号</th>
+                                            <th>菜品名称</th>
+                                            <th>单价</th>
+                                            <th>数量</th>
+                                            <th>折扣</th>
+                                            <th>创建时间</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.OrderDetailList != null && Model.OrderDetailList.Count > 0)
+                                        {
+                                            foreach (var item in Model.OrderDetailList)
+                                            {
+                                                <tr>
+                                                    <td>@item.OrderDetailId</td>
+                                                    <td>@item.Dishes.Name</td>
+                                                    <td>@item.Dishes.RealPrice</td>
+                                                    <td>@item.Count</td>
+                                                    <td>@Model.Order.DiscountRemark</td>
+                                                    <td>@item.OrderTime</td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2E886FA0-9939-44BD-B9E3-19F1C29EF69B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OrderingSystem.Domain</RootNamespace>
+    <AssemblyName>OrderingSystem.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EnumHelp.cs" />
+    <Compile Include="IAggregateRoot.cs" />
+    <Compile Include="Model\ActivityDiscount.cs" />
+    <Compile Include="Model\ActivityMinus.cs" />
+    <Compile Include="Model\Appointment.cs" />
+    <Compile Include="Model\BaseDic.cs" />
+    <Compile Include="Model\BaseStation.cs" />
+    <Compile Include="Model\BaseLine.cs" />
+    <Compile Include="Model\BaseImage.cs" />
+    <Compile Include="Model\BusinessGroupImage.cs" />
+    <Compile Include="Model\BusinessLable.cs" />
+    <Compile Include="Model\BusinessPayConfig.cs" />
+    <Compile Include="Model\Goods.cs" />
+    <Compile Include="Model\GoodsImage.cs" />
+    <Compile Include="Model\HotelCategory.cs" />
+    <Compile Include="Model\JpushLog.cs" />
+    <Compile Include="Model\RiceDateFeedback.cs" />
+    <Compile Include="Model\RiceDateUser.cs" />
+    <Compile Include="Model\RiceDate.cs" />
+    <Compile Include="Model\OrderCustomer.cs" />
+    <Compile Include="Model\OrderStatusLog.cs" />
+    <Compile Include="Model\HotelRelateCategory.cs" />
+    <Compile Include="Model\JourneyArticle.cs" />
+    <Compile Include="Model\RoomImage.cs" />
+    <Compile Include="Model\TicketRelateRoom.cs" />
+    <Compile Include="Model\TicketRelateTicket.cs" />
+    <Compile Include="Model\Ticket.cs" />
+    <Compile Include="Model\Room.cs" />
+    <Compile Include="Model\ProductImage.cs" />
+    <Compile Include="Model\ProductRelateLable.cs" />
+    <Compile Include="Model\ProductLable.cs" />
+    <Compile Include="Model\BusinessEvaluation.cs" />
+    <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\BusinessInfo.cs" />
+    <Compile Include="Model\BusinessBannerImage.cs" />
+    <Compile Include="Model\BusinessComment.cs" />
+    <Compile Include="Model\BusinessImage.cs" />
+    <Compile Include="Model\BaseArea.cs" />
+    <Compile Include="Model\BusinessType.cs" />
+    <Compile Include="Model\CommentImage.cs" />
+    <Compile Include="Model\Dishes.cs" />
+    <Compile Include="Model\DishesCategory.cs" />
+    <Compile Include="Model\DishesImage.cs" />
+    <Compile Include="Model\BusinessGroup.cs" />
+    <Compile Include="Model\DishesLable.cs" />
+    <Compile Include="Model\DishesRelateLable.cs" />
+    <Compile Include="Model\DishesRelateSpec.cs" />
+    <Compile Include="Model\DishesSpec.cs" />
+    <Compile Include="Model\DishesSpecDetail.cs" />
+    <Compile Include="Model\SmsLog.cs" />
+    <Compile Include="Model\Level.cs" />
+    <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\OrderDetail.cs" />
+    <Compile Include="Model\OrderStatus.cs" />
+    <Compile Include="Model\PayDetail.cs" />
+    <Compile Include="Model\RecommendDishes.cs" />
+    <Compile Include="Model\SysAccount.cs" />
+    <Compile Include="Model\SysRole.cs" />
+    <Compile Include="Model\SysRoleMenu.cs" />
+    <Compile Include="Model\SysMenu.cs" />
+    <Compile Include="Model\SystemLog.cs" />
+    <Compile Include="Model\TopSearch.cs" />
+    <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Model\UserLikes.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

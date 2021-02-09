@@ -1,0 +1,181 @@
+﻿@{
+    ViewBag.Title = "订单列表";
+}
+@model OrderingSystem.Admin.Models.OrderVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="row" style="padding:10px 10px;">
+                        <form action="/Order/List" method="get">
+                            <div class="row col-sm-12">
+                                <select class="form-control inline" style="width:70%;display:none;" id="selpayMethod" name="selpayMethod">
+                                    <option value="0">请选择付款方式</option>
+                                    <option @(Model.QueryOrderStatusId == 1 ? "selected" : "") value="1">微信</option>
+                                    <option @(Model.QueryOrderStatusId == 2 ? "selected" : "") value="2">支付宝</option> 
+                                </select>
+
+                                <div class="col-sm-3">
+                                    商家名称：
+                                    <input type="text" id="QueryBusinessName" name="QueryBusinessName" class="form-control inline" style="width:70%;" placeholder="请输入查询商家名称" value="@(Model.QueryBusinessName ?? "")">
+                                </div>
+                                <div class="col-sm-3">
+                                    订单编号：
+                                    <input type="text" id="QueryOrderNo" name="QueryOrderNo" class="form-control inline" style="width:70%;" placeholder="请输入查询订单编号" value="@(Model.QueryOrderNo ?? "")">
+                                </div>
+                                <div class="col-sm-3">
+                                    下单人：<input type="text" id="QueryUserName" name="QueryUserName" class="form-control inline" style="width:70%;" placeholder="请输入查询下单人" value="@(Model.QueryUserName ?? "")">
+                                </div>
+                                <div class="col-sm-3">
+                                    订单状态：
+                                    <select class="form-control inline" style="width:70%;" id="QueryOrderStatusId" name="QueryOrderStatusId">
+                                        <option value="0">请选择状态</option>
+                                        <option @(Model.QueryOrderStatusId == 1 ? "selected" : "") value="1">未付款</option>
+                                        <option @(Model.QueryOrderStatusId == 2 ? "selected" : "") value="2">已付款</option>
+                                        <option @(Model.QueryOrderStatusId == 3 ? "selected" : "") value="3">已取消</option>
+                                        <option @(Model.QueryOrderStatusId == 4 ? "selected" : "") value="4">退款中</option>
+                                        <option @(Model.QueryOrderStatusId == 5 ? "selected" : "") value="5">已退款</option>
+                                        <option @(Model.QueryOrderStatusId == 6 ? "selected" : "") value="6">退款失败</option>
+                                        <option @(Model.QueryOrderStatusId == 7 ? "selected" : "") value="7">已使用</option>
+                                        <option @(Model.QueryOrderStatusId == 8 ? "selected" : "") value="8">已结算</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row col-sm-12" style="margin-top:15px;">
+                                <div class="col-sm-4">
+                                    创建日期：
+                                    <input placeholder="开始日期" class="form-control layer-date" id="QueryStartTime" name="QueryStartTime" style="vertical-align:middle;width:105px;" value="@(Model.QueryStartTime??"")">
+                                    <input placeholder="结束日期" class="form-control layer-date" id="QueryEndTime" name="QueryEndTime" style="vertical-align:middle;width:105px;" value="@(Model.QueryEndTime??"")">
+                                </div>
+                                <span style="float:right;margin-right:40px;">
+                                    <button type="submit" class="btn btn-primary">搜索</button>
+                                    <button type="button" id="btnExport" class="btn btn-info"><i class="fa fa-file-excel-o padding-right-4"></i>&nbsp;导出Execl</button>
+                                </span>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">序号</th>
+                                    <th class="text-center">订单编号</th>
+                                    <th class="text-right">金额(￥)</th>
+                                    <th class="text-center">下单人</th>
+                                    <th class="text-center">下单人电话</th>
+                                    <th class="text-center">商家</th>
+                                    <th class="text-center">座位号</th>
+                                    <th class="text-center">备注信息</th>
+                                    <th class="text-center">创建时间</th>
+                                    <th class="text-center">订单状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Paging.Items != null && Model.Paging.Items.Count > 0)
+                                {
+                                    foreach (var item in Model.Paging.Items)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@item.OrderId</td>
+                                            <td class="text-center">@item.OrderNo</td>
+                                            <td class="text-right">@item.OrignAmount</td>
+                                            <td class="text-center">
+                                                @if (item.User != null)
+                                                {
+                                                    @item.User.NickName
+                                                }
+                                                else
+                                                { }
+                                            </td>
+                                            <td class="text-center">
+                                                @if (item.User != null)
+                                                {
+                                                    @item.User.PhoneNo
+                                                }
+                                                else
+                                                { }
+                                            </td>
+                                            <td class="text-center">
+                                                @if (item.BusinessInfo != null)
+                                                {
+                                                    @item.BusinessInfo.Name
+                                                }
+                                                else
+                                                { }
+                                            </td>
+                                            <td class="text-center">@item.SeatNo</td>
+                                            <td class="text-center">@item.Remark</td>
+                                            <td class="text-center">@item.OrderTime</td>
+                                            <td class="text-center">
+                                                @switch (item.OrderStatusId)
+                                                {
+                                                    case 1:
+                                                        <button type="button" class="btn btn-danger btn-xs">未付款</button>
+                                                        break;
+                                                    case 2:
+                                                        <button type="button" class="btn btn-info btn-xs">已付款</button>
+                                                        break;
+                                                    case 3:
+                                                        <button type="button" class="btn btn-warning btn-xs">已取消</button>
+                                                        break;
+                                                    case 4:
+                                                        <button type="button" class="btn btn-primary btn-xs">退款中</button>
+                                                        break;
+                                                    case 5:
+                                                        <button type="button" class="btn btn-success btn-xs">已退款</button>
+                                                        break;
+                                                    case 6:
+                                                        <button type="button" style="background-color:#FF9900;color: #FFFFFF;border-color: #FF9900;" class="btn btn-xs">退款失败</button>
+                                                        break;
+                                                    case 7:
+                                                        <button type="button" style="background-color:#FFCC00;color: #FFFFFF;border-color: #FFCC00;" class="btn btn-xs">已使用</button>
+                                                        break;
+                                                    case 8:
+                                                        <button type="button" style="background-color:#0033FF;color: #FFFFFF;border-color: #0033FF;" class="btn btn-xs">已结算</button>
+                                                        break;
+                                                    default:
+                                                        break;
+                                                }
+                                            </td>
+                                            <td>
+                                                <a href="/Order/Detail?QueryOrderNo=@item.OrderNo" class="btn btn-info"><i class="fa fa-paste padding-right-4"></i>&nbsp;详情</a>
+                                                @if (item.OrderStatusId == 1)
+                                                {
+                                                    <a href="/Order/PayEdit/@item.OrderId" class="btn btn-info"><i class="fa fa-paste padding-right-4"></i>&nbsp;确认付款</a>
+                                                }
+                                                @if (item.OrderStatusId == 2)
+                                                {
+                                                    <button onclick="endOrder('/Order/UpdateStatus?OrderStatusId=@((int)OrderingSystem.Domain.EnumHelp.OrderStatus.已使用)','/Orders/List','@item.OrderId','@((int)OrderingSystem.Domain.EnumHelp.OrderStatus.已使用)','@OrderingSystem.Domain.EnumHelp.OrderStatus.已使用')" class="btn btn-success"><i class="fa fa-check padding-right-4"></i>&nbsp;确认消费</button>
+                                                }
+                                                @*@if (item.OrderStatusId == 7)
+                                                    {
+                                                        <button onclick="settled('/Order/UpdateStatus?OrderStatusId=@((int)OrderingSystem.Domain.EnumHelp.OrderStatus.已结算)','/Orders/List','@item.OrderId','@((int)OrderingSystem.Domain.EnumHelp.OrderStatus.已结算)','@OrderingSystem.Domain.EnumHelp.OrderStatus.已结算')" style="background-color:#0033FF;color: #FFFFFF;border-color: #0033FF;" class="btn"><i class="fa fa-calculator padding-right-4"></i>&nbsp;确认结算</button>
+                                                    }*@
+                                                @*<button onclick="del('/Order/Delete?OrderId=@item.OrderId','/Orders/List','@item.OrderId')" class="btn btn-danger"><i class="fa fa-times padding-right-4"></i>&nbsp;删除</button>*@
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="btn-group">
+                                <a href="/Order/List" class="btn btn-info" style="margin-left:10px;" data-refresh="0"><i class="fa fa-refresh padding-right-4"></i>&nbsp;刷新</a>
+                            </div>@Html.Raw(Model.Paging.Text)
+                            <div class="pull-right" style="line-height: 3;padding-right: 20px;">@("共 " + Model.Paging.Items.Count + " 单，共 " + Model.TotalAmount + " 元") </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script{
+    <script src="@("/Scripts/ViewJs/Order/OrderList.js"+OrderingSystem.Admin.Versions.Ver)"></script>
+     
+}

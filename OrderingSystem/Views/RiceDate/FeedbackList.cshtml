@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "拼饭用户反馈列表";
+}
+@using OrderingSystem.Domain;
+@model OrderingSystem.Admin.Models.RiceDateFeedbackVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">序号</th>
+                                    <th class="text-center">用户ID</th> 
+                                    <th class="text-center">反馈内容</th>
+                                    <th class="text-center">创建时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Paging != null && Model.Paging.Count > 0)
+                                {
+                                    foreach (var item in Model.Paging)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@item.RiceDateFeedbackId</td>
+                                            <td class="text-center">
+                                            @if (item.User != null)
+                                            {
+                                                @item.User.NickName
+                                            }
+                                            else
+                                            {
+                                                @item.UserId
+                                            }</td> 
+                                            <td class="text-center">
+                                                @item.Content
+                                            </td>
+                                            <td class="text-center">@item.CreateTime</td>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="btn-group">
+                                <a href="/RiceDate/FeedbackList/@Model.Id" class="btn btn-info" style="margin-left:10px;" data-refresh="0"><i class="fa fa-refresh padding-right-4"></i>&nbsp;刷新</a>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

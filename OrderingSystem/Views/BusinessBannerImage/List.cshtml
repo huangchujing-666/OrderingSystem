@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "轮播图列表";
+}
+@model OrderingSystem.Admin.Models.BusinessBannerImageVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="row" style="padding:10px 10px;">
+                        <form action="/BusinessBannerImage/List" method="get">
+                            <div class="col-sm-4">
+                                商家名称：
+                                <input type="text" name="QueryName" class="form-control inline" style="width:70%;" placeholder="请输入商家名称" value="@(Model.QueryName ?? "")">
+                            </div>
+                            <button type="submit" class="btn btn-info">搜索</button>
+                        </form>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">序号</th>
+                                    <th class="text-center">模块</th>
+                                    <th class="text-center">关联商家</th>
+                                    <th class="text-center">图片</th>
+                                    <th class="text-center">备注</th>
+                                    <th class="text-center">排序</th>
+                                    <th class="text-center">创建时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Paging.Items != null && Model.Paging.Items.Count > 0)
+                                {
+                                    foreach (var item in Model.Paging.Items)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@item.BusinessBannerImageId</td>
+                                            <td class="text-center"> 
+                                                @if (item.Module == 1)
+                                                {
+                                                    @("食");
+                                                }
+                                                else if (item.Module == 2)
+                                                {
+                                                    @("衣");
+                                                }
+                                                else if (item.Module == 3)
+                                                {
+                                                    @("乐");
+                                                }
+                                                else if (item.Module == 4)
+                                                {
+                                                    @("酒店");
+                                                }
+                                                else if (item.Module == 5)
+                                                {
+                                                    @("景点");
+                                                }
+                                            </td>
+                                            <td class="text-center">
+                                                @if (item.BusinessInfo != null)
+                                                {
+                                                    @item.BusinessInfo.Name
+                                                }
+                                            </td>
+                                            <td class="text-center td-img">
+                                                @if (item.BaseImageId != 0 && item.BaseImage != null)
+                                                {
+                                                    <img src="@item.BaseImage.Source@item.BaseImage.Path" class="fancy" href="@item.BaseImage.Source@item.BaseImage.Path" data-fancybox-group="gallery" onerror="this.src = '/images/404image.png'">
+                                                }
+                                                else
+                                                {
+                                                    <img src="/images/404image.png">
+                                                }
+                                            </td>
+                                            <td class="text-center">@item.Descript</td>
+                                            <td class="text-center">@item.SortNo</td>
+                                            <td class="text-center">@item.CreateTime</td>
+                                            <td>
+                                                <a href="/BusinessBannerImage/Edit/@item.BusinessBannerImageId" class="btn btn-info"><i class="fa fa-paste padding-right-4"></i>&nbsp;编辑</a>
+
+                                            </td>
+
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="btn-group">
+                                <a href="/BusinessBannerImage/Edit" class="btn btn-info" data-refresh="0"><i class="fa fa-plus padding-right-4"></i>&nbsp;添加</a>
+                                <a href="/BusinessBannerImage/List" class="btn btn-info" style="margin-left:10px;" data-refresh="0"><i class="fa fa-refresh padding-right-4"></i>&nbsp;刷新</a>
+                            </div>
+                            @Html.Raw(Model.Paging.Text)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

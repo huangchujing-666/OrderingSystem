@@ -1,0 +1,208 @@
+﻿@{
+    ViewBag.Title = "衣品预约列表";
+}
+@using OrderingSystem.Domain;
+@model OrderingSystem.Admin.Models.AppointmentVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="row" style="padding:10px 10px;">
+                        <form action="/Appointment/List" method="get">
+                            <div class="col-sm-3">
+                                用户名称：
+                                <input type="text" name="QueryUserName" class="form-control inline" style="width:70%;" placeholder="请输入查询用户名称" value="@(Model.QueryUserName??"")">
+                            </div>
+                            <div class="col-sm-3">
+                                手机号码：
+                                <input type="text" name="QueryPhone" class="form-control inline" style="width:70%;" placeholder="请输入查询手机号码" value="@(Model.QueryPhone??"")">
+                            </div>
+                            <div class="col-sm-3">
+                                <button type="submit" class="btn btn-info">搜索</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">序号</th>
+                                    <th class="text-center">用户名称</th>
+                                    <th class="text-center">商家名称</th>
+                                    <th class="text-center">预约时间</th>
+                                    @*<th class="text-center">衣品信息</th>*@
+                                    <th class="text-center">联系方式</th>
+                                    <th class="text-center">备注</th>
+                                    <th class="text-center">状态</th>
+                                    <th class="text-center">驳回原因</th>
+                                    <th class="text-center">创建时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Paging.Items != null && Model.Paging.Items.Count > 0)
+                                {
+                                    foreach (var item in Model.Paging.Items)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@item.AppointmentId</td>
+                                            <td class="text-center">@item.UserName</td>
+                                            <td class="text-center">
+                                                @if (item.BusinessInfo != null)
+                                                {
+                                                    @item.BusinessInfo.Name
+                                                }
+                                            </td>
+                                            <td class="text-center">@item.AppointmentTime</td>
+                                            @*<td class="text-center">@item.ValueIds</td>*@
+                                            <td class="text-center">@item.Phone</td>
+                                            <td class="text-center">@item.Remark</td>
+                                            <td class="text-center">
+                                                @if (item.Status == 1)
+                                                {
+                                                    <span class="label label-danger">申请中</span>
+                                                }
+                                                else if (item.Status == 2)
+                                                {
+                                                    <span class="label label-info">通过</span>
+                                                }
+                                                else if (item.Status == 3)
+                                                {
+                                                    <span class="label label-warning">拒绝</span>
+                                                }
+                                                else if (item.Status == 4)
+                                                {
+                                                    <span class="label label-warning">已取消</span>
+                                                }
+                                            </td>
+                                            <td class="text-center">
+                                            @if (item.Status == 3) {
+                                                    @item.DenyReason
+                                            }
+                                            </td>
+                                            <td class="text-center">@item.CreateTime</td>
+                                            <td>
+
+                                                <a href="/Appointment/Detail/@item.AppointmentId" class="btn btn-info"><i class="fa fa-paste padding-right-4"></i>&nbsp;详情</a>
+                                                @if (item.Status == 1)
+                                                {
+                                                    <button onclick="pass('/Appointment/UpdateStatus','@item.AppointmentId','@((int)EnumHelp.RiceDateApplyStatus.申请通过)')" class="btn btn-primary"><i class="fa fa-check padding-right-4"></i>&nbsp;通过</button>
+                                                    <button onclick="deny('/Appointment/UpdateStatus','@item.AppointmentId','@((int)EnumHelp.RiceDateApplyStatus.被驳回)')" class="btn btn-warning"><i class="fa fa-check padding-right-4"></i>&nbsp;驳回</button>
+                                                }
+
+                                                @*<a href="/Appointment/Edit/@item.AppointmentId" class="btn btn-info"><i class="fa fa-paste padding-right-4"></i>&nbsp;编辑</a>*@
+                                                @*@if (item.Status == 0)
+                                                    {
+                                                        <button onclick="enable('/Appointment/UpdateStatus','/Appointment/List','@item.AppointmentId','@((int)EnumHelp.EnabledEnum.有效)')" class="btn btn-primary"><i class="fa fa-check padding-right-4"></i>&nbsp;启用</button>
+                                                    }
+                                                    @if (item.Status == 1)
+                                                    {
+                                                        <button onclick="disable('/Appointment/UpdateStatus','/Appointment/List','@item.AppointmentId','@((int)EnumHelp.EnabledEnum.无效)')" class="btn btn-warning"><i class="fa fa-warning padding-right-4"></i>&nbsp;禁用</button>
+                                                    }*@
+                                                @*<button onclick="del('/Appointment/Delete','/Appointment/List','@item.AppointmentId')" class="btn btn-danger"><i class="fa fa-times padding-right-4"></i>&nbsp;删除</button>*@
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="btn-group">
+                                @*<a href="/Appointment/Edit" class="btn btn-info" data-refresh="0"><i class="fa fa-plus padding-right-4"></i>&nbsp;添加</a>*@
+                                <a href="/Appointment/List" class="btn btn-info" style="margin-left:10px;" data-refresh="0"><i class="fa fa-refresh padding-right-4"></i>&nbsp;刷新</a>
+                            </div>
+                            @Html.Raw(Model.Paging.Text)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section script{
+    @*<script src="@("/Scripts/ViewJs/Order/OrderList.js"+OrderingSystem.Admin.Versions.Ver)"></script>*@
+    <script type="text/javascript">
+        //驳回弹窗
+        var pass = function (url, id, status) {
+
+            swal({
+                title: "您确定要通过用户的预约申请吗",
+                text: "请谨慎操作！",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "是的，我要通过！",
+                cancelButtonText: "让我再考虑一下…",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    window.parent.showModal();
+                    $.post(url, { Id: id, isEnabled: status }, function (data) {
+                        if (data.Status == 200) {
+                            swal("启用成功！", "您已经通过用户的预约申请。", "success");
+                            setTimeout(function () {
+                                //window.location.href = skipUrl;
+                                window.location.href = location.href;
+                            }, 1500);
+                        } else {
+                            swal("提示", "启用失败");
+                        }
+                    }).complete(function () { window.parent.hideModal(); });
+                } else {
+                    swal("已取消", "您取消了操作！", "error");
+                }
+            });
+            
+        };
+
+
+         //驳回弹窗
+        var deny = function (url, id, status) {
+
+
+             swal({
+                 title: "请输入驳回的原因！",
+                 //text: "转账金额(营业额 * (1 - 结算比例))：￥" + discountAmount,
+                 text: "驳回原因",
+                 type: "input",
+                 showCancelButton: true,
+                 closeOnConfirm: false,
+                 animation: "slide-from-top",
+                 inputPlaceholder: "输入驳回原因"
+             },
+             function (inputValue) {
+
+                 if (inputValue === false) return false;
+
+                 if (inputValue === "") {
+                     swal.showInputError("请输入被驳回的原因！");
+                     return false
+                 }
+
+                 window.parent.showModal();
+                  
+                 $.post(url, { id: id, isEnabled: status , remark: inputValue }, function (data) {
+                     //swal("非常好！", "你输入了：" + inputValue, "success");
+                     if (data.Status == 200) {
+                         swal("操作成功！", "已成功驳回了用户的预约申请。", "success");
+                         setTimeout(function () {
+                             //window.location.href = skipUrl;
+                             window.location.href = location.href;
+                         }, 2000);
+                     } else {
+                         swal("提示", "操作失败");
+                     }
+                 }).complete(function () { window.parent.hideModal(); });
+
+
+
+             });
+         };
+
+    </script>
+}

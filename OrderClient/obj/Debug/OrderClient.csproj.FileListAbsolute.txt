@@ -1,0 +1,14 @@
+E:\H5Api\OrderingSystem\OrderClient\bin\Debug\favicon.ico
+E:\H5Api\OrderingSystem\OrderClient\bin\Debug\notice.wav
+E:\H5Api\OrderingSystem\OrderClient\bin\Debug\OrderClient.exe.config
+E:\H5Api\OrderingSystem\OrderClient\bin\Debug\OrderClient.exe
+E:\H5Api\OrderingSystem\OrderClient\bin\Debug\OrderClient.pdb
+E:\H5Api\OrderingSystem\OrderClient\obj\Debug\OrderClient.Detail.resources
+E:\H5Api\OrderingSystem\OrderClient\obj\Debug\OrderClient.Login.resources
+E:\H5Api\OrderingSystem\OrderClient\obj\Debug\OrderClient.MessageForm.resources
+E:\H5Api\OrderingSystem\OrderClient\obj\Debug\OrderClient.OrderForm.resources
+E:\H5Api\OrderingSystem\OrderClient\obj\Debug\OrderClient.Properties.Resources.resources
+E:\H5Api\OrderingSystem\OrderClient\obj\Debug\OrderClient.csproj.GenerateResource.Cache
+E:\H5Api\OrderingSystem\OrderClient\obj\Debug\OrderClient.exe
+E:\H5Api\OrderingSystem\OrderClient\obj\Debug\OrderClient.pdb
+E:\H5Api\OrderingSystem\OrderClient\obj\Debug\OrderClient.csprojResolveAssemblyReference.cache

@@ -1,0 +1,928 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2275C9AA-0FE3-48A1-9C9F-0441091DE4BD}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OrderingSystem</RootNamespace>
+    <AssemblyName>OrderingSystem</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.8.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.8.0\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Common\Loginer.cs" />
+    <Compile Include="Common\SessionHelper.cs" />
+    <Compile Include="Common\Versions.cs" />
+    <Compile Include="Controllers\ActivityDiscountController.cs" />
+    <Compile Include="Controllers\ActivityMinusController.cs" />
+    <Compile Include="Controllers\AreaController.cs" />
+    <Compile Include="Controllers\BaseAreaController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AppointmentController.cs" />
+    <Compile Include="Controllers\BusinessPayConfigController.cs" />
+    <Compile Include="Controllers\GoodsImageController.cs" />
+    <Compile Include="Controllers\GoodsController.cs" />
+    <Compile Include="Controllers\RiceDateController.cs" />
+    <Compile Include="Controllers\JourneyArticleController.cs" />
+    <Compile Include="Controllers\BaseLineController.cs" />
+    <Compile Include="Controllers\BaseStationController.cs" />
+    <Compile Include="Controllers\BusinessBannerImageController.cs" />
+    <Compile Include="Controllers\BusinessCommentController.cs" />
+    <Compile Include="Controllers\BusinessController.cs" />
+    <Compile Include="Controllers\BusinessEvaluationController.cs" />
+    <Compile Include="Controllers\BusinessGroupController.cs" />
+    <Compile Include="Controllers\BusinessGroupImageController.cs" />
+    <Compile Include="Controllers\BusinessLableController.cs" />
+    <Compile Include="Controllers\HotelCategoryController.cs" />
+    <Compile Include="Controllers\RoomImageController.cs" />
+    <Compile Include="Controllers\TicketRelateRoomController.cs" />
+    <Compile Include="Controllers\TicketRelateTicketController.cs" />
+    <Compile Include="Controllers\TicketController.cs" />
+    <Compile Include="Controllers\RoomController.cs" />
+    <Compile Include="Controllers\ProductImageController.cs" />
+    <Compile Include="Controllers\ProductLabelController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\DishesImageController.cs" />
+    <Compile Include="Controllers\BusinessImageController.cs" />
+    <Compile Include="Controllers\BusinessInfoController.cs" />
+    <Compile Include="Controllers\DishesController.cs" />
+    <Compile Include="Controllers\DishesCategoryController.cs" />
+    <Compile Include="Controllers\DishesSpecController.cs" />
+    <Compile Include="Controllers\DishesLabelController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PayDetailController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\SmsLogController.cs" />
+    <Compile Include="Controllers\SysRoleController.cs" />
+    <Compile Include="Controllers\SysRoleMenuController.cs" />
+    <Compile Include="Controllers\SysMenuController.cs" />
+    <Compile Include="Controllers\UploaderController.cs" />
+    <Compile Include="Controllers\SysAccountController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\AccountAuthorize.cs" />
+    <Compile Include="Infrastructure\DependencyRegistrar.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ActivityDiscountVM.cs" />
+    <Compile Include="Models\ActivityMinusVM.cs" />
+    <Compile Include="Models\AppointmentVM.cs" />
+    <Compile Include="Models\BusinessPayConfigVM.cs" />
+    <Compile Include="Models\GoodsImageVM.cs" />
+    <Compile Include="Models\GoodsVM.cs" />
+    <Compile Include="Models\RiceDateUserVM.cs" />
+    <Compile Include="Models\RiceDateFeedbackVM.cs" />
+    <Compile Include="Models\RiceDateVM.cs" />
+    <Compile Include="Models\BaseAreaVM.cs" />
+    <Compile Include="Models\BaseImgInfoVM.cs" />
+    <Compile Include="Models\JourneyArticleVM.cs" />
+    <Compile Include="Models\BaseLineVM.cs" />
+    <Compile Include="Models\BaseStationVM.cs" />
+    <Compile Include="Models\BusinessCommentVM.cs" />
+    <Compile Include="Models\BusinessEvaluationVM.cs" />
+    <Compile Include="Models\BusinessImageVM.cs" />
+    <Compile Include="Models\BusinessGroupVM.cs" />
+    <Compile Include="Models\BusinessGroupImageVM.cs" />
+    <Compile Include="Models\BusinessLableVM.cs" />
+    <Compile Include="Models\HotelCategoryVM.cs" />
+    <Compile Include="Models\RoomImageVM.cs" />
+    <Compile Include="Models\ProductImageVM.cs" />
+    <Compile Include="Models\DishesImageVM.cs" />
+    <Compile Include="Models\DishesCategoryVM.cs" />
+    <Compile Include="Models\ProductLabelVM.cs" />
+    <Compile Include="Models\DishesSpecVM.cs" />
+    <Compile Include="Models\BusinessBannerImageVM.cs" />
+    <Compile Include="Models\DishesLabelVM.cs" />
+    <Compile Include="Models\TicketRelateRoomVM.cs" />
+    <Compile Include="Models\TicketRelateTicketVM.cs" />
+    <Compile Include="Models\TicketVM.cs" />
+    <Compile Include="Models\RoomVM.cs" />
+    <Compile Include="Models\ProductVM.cs" />
+    <Compile Include="Models\DishesVM.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PayDetailExpert.cs" />
+    <Compile Include="Models\PayDetailVM.cs" />
+    <Compile Include="Models\OrderExpert.cs" />
+    <Compile Include="Models\OrderVM.cs" />
+    <Compile Include="Models\SmsLogVM.cs" />
+    <Compile Include="Models\SyRoleMenuVM.cs" />
+    <Compile Include="Models\BusinessInfoVM.cs" />
+    <Compile Include="Models\SysRoleVM.cs" />
+    <Compile Include="Models\SysMenuVM.cs" />
+    <Compile Include="Models\SysAccountVM.cs" />
+    <Compile Include="Models\UserVM.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scripts\ueditor\net\App_Code\Config.cs" />
+    <Compile Include="Scripts\ueditor\net\App_Code\ConfigHandler.cs" />
+    <Compile Include="Scripts\ueditor\net\App_Code\CrawlerHandler.cs" />
+    <Compile Include="Scripts\ueditor\net\App_Code\Handler.cs" />
+    <Compile Include="Scripts\ueditor\net\App_Code\ListFileHandler.cs" />
+    <Compile Include="Scripts\ueditor\net\App_Code\NotSupportedHandler.cs" />
+    <Compile Include="Scripts\ueditor\net\App_Code\PathFormater.cs" />
+    <Compile Include="Scripts\ueditor\net\App_Code\UploadHandler.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\animate.css" />
+    <Content Include="Content\bootstrap-select.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\common.css" />
+    <Content Include="Content\fancybox.css" />
+    <Content Include="Content\fileinput.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\login.css" />
+    <Content Include="Content\patterns\header-profile-skin-1.png" />
+    <Content Include="Content\patterns\header-profile-skin-3.png" />
+    <Content Include="Content\patterns\header-profile.png" />
+    <Content Include="Content\patterns\shattered.png" />
+    <Content Include="Content\plugins\sweetalert\sweetalert.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="images\404image.png" />
+    <Content Include="images\blank.gif" />
+    <Content Include="images\fancybox_loading.gif" />
+    <Content Include="images\fancybox_overlay.png" />
+    <Content Include="images\fancybox_sprite.png" />
+    <Content Include="images\locked.png" />
+    <Content Include="images\login-background.jpg" />
+    <Content Include="images\profile_small.jpg" />
+    <Content Include="images\user.png" />
+    <Content Include="images\waterflow.png" />
+    <Content Include="Meadia\system.mp3" />
+    <Content Include="Meadia\system.wav" />
+    <Content Include="Scripts\ajaxfileupload.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="log4net.config" />
+    <None Include="Properties\PublishProfiles\admin.pubxml" />
+    <None Include="Properties\PublishProfiles\OrderingSystemBackGround.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\common\common.js" />
+    <Content Include="Scripts\contabs.js" />
+    <Content Include="Scripts\content.js" />
+    <Content Include="Scripts\echarts.min.js" />
+    <Content Include="Scripts\fileinput.js" />
+    <Content Include="Scripts\fileupload.js" />
+    <Content Include="Scripts\hplus.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.fancybox.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\plugins\fileinput\fileinput.js" />
+    <Content Include="Scripts\plugins\fileinput\fileinput.min.js" />
+    <Content Include="Scripts\plugins\fileinput\zh.js" />
+    <Content Include="Scripts\plugins\layer\extend\layer.ext.js" />
+    <Content Include="Scripts\plugins\layer\laydate\laydate.js" />
+    <Content Include="Scripts\plugins\layer\laydate\need\laydate.css" />
+    <Content Include="Scripts\plugins\layer\laydate\skins\default\icon.png" />
+    <Content Include="Scripts\plugins\layer\laydate\skins\default\laydate.css" />
+    <Content Include="Scripts\plugins\layer\layer.min.js" />
+    <Content Include="Scripts\plugins\layer\layim\layim.css" />
+    <Content Include="Scripts\plugins\layer\layim\layim.js" />
+    <Content Include="Scripts\plugins\layer\layim\loading.gif" />
+    <Content Include="Scripts\plugins\layer\skin\default\icon-ext.png" />
+    <Content Include="Scripts\plugins\layer\skin\default\icon.png" />
+    <Content Include="Scripts\plugins\layer\skin\default\icon_ext.png" />
+    <Content Include="Scripts\plugins\layer\skin\default\loading-0.gif" />
+    <Content Include="Scripts\plugins\layer\skin\default\loading-1.gif" />
+    <Content Include="Scripts\plugins\layer\skin\default\loading-2.gif" />
+    <Content Include="Scripts\plugins\layer\skin\default\textbg.png" />
+    <Content Include="Scripts\plugins\layer\skin\default\xubox_ico0.png" />
+    <Content Include="Scripts\plugins\layer\skin\default\xubox_loading0.gif" />
+    <Content Include="Scripts\plugins\layer\skin\default\xubox_loading1.gif" />
+    <Content Include="Scripts\plugins\layer\skin\default\xubox_loading2.gif" />
+    <Content Include="Scripts\plugins\layer\skin\default\xubox_loading3.gif" />
+    <Content Include="Scripts\plugins\layer\skin\default\xubox_title0.png" />
+    <Content Include="Scripts\plugins\layer\skin\layer.css" />
+    <Content Include="Scripts\plugins\layer\skin\layer.ext.css" />
+    <Content Include="Scripts\plugins\layer\skin\moon\default.png" />
+    <Content Include="Scripts\plugins\layer\skin\moon\style.css" />
+    <Content Include="Scripts\plugins\metisMenu\jquery.metisMenu.js" />
+    <Content Include="Scripts\plugins\nestable\nestable.js" />
+    <Content Include="Scripts\plugins\pace\pace.min.js" />
+    <Content Include="Scripts\plugins\slimscroll\jquery.slimscroll.min.js" />
+    <Content Include="Scripts\plugins\sort\sort.js" />
+    <Content Include="Scripts\plugins\sweetalert\sweetalert.min.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\ueditor\dialogs\anchor\anchor.html" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\attachment.css" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\attachment.html" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\attachment.js" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\fileTypeImages\icon_chm.gif" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\fileTypeImages\icon_default.png" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\fileTypeImages\icon_doc.gif" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\fileTypeImages\icon_exe.gif" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\fileTypeImages\icon_jpg.gif" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\fileTypeImages\icon_mp3.gif" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\fileTypeImages\icon_mv.gif" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\fileTypeImages\icon_pdf.gif" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\fileTypeImages\icon_ppt.gif" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\fileTypeImages\icon_psd.gif" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\fileTypeImages\icon_rar.gif" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\fileTypeImages\icon_txt.gif" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\fileTypeImages\icon_xls.gif" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\images\alignicon.gif" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\images\alignicon.png" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\images\bg.png" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\images\file-icons.gif" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\images\file-icons.png" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\images\icons.gif" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\images\icons.png" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\images\image.png" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\images\progress.png" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\images\success.gif" />
+    <Content Include="Scripts\ueditor\dialogs\attachment\images\success.png" />
+    <Content Include="Scripts\ueditor\dialogs\background\background.css" />
+    <Content Include="Scripts\ueditor\dialogs\background\background.html" />
+    <Content Include="Scripts\ueditor\dialogs\background\background.js" />
+    <Content Include="Scripts\ueditor\dialogs\background\images\bg.png" />
+    <Content Include="Scripts\ueditor\dialogs\background\images\success.png" />
+    <Content Include="Scripts\ueditor\dialogs\charts\chart.config.js" />
+    <Content Include="Scripts\ueditor\dialogs\charts\charts.css" />
+    <Content Include="Scripts\ueditor\dialogs\charts\charts.html" />
+    <Content Include="Scripts\ueditor\dialogs\charts\charts.js" />
+    <Content Include="Scripts\ueditor\dialogs\charts\images\charts0.png" />
+    <Content Include="Scripts\ueditor\dialogs\charts\images\charts1.png" />
+    <Content Include="Scripts\ueditor\dialogs\charts\images\charts2.png" />
+    <Content Include="Scripts\ueditor\dialogs\charts\images\charts3.png" />
+    <Content Include="Scripts\ueditor\dialogs\charts\images\charts4.png" />
+    <Content Include="Scripts\ueditor\dialogs\charts\images\charts5.png" />
+    <Content Include="Scripts\ueditor\dialogs\emotion\emotion.css" />
+    <Content Include="Scripts\ueditor\dialogs\emotion\emotion.html" />
+    <Content Include="Scripts\ueditor\dialogs\emotion\emotion.js" />
+    <Content Include="Scripts\ueditor\dialogs\emotion\images\0.gif" />
+    <Content Include="Scripts\ueditor\dialogs\emotion\images\bface.gif" />
+    <Content Include="Scripts\ueditor\dialogs\emotion\images\cface.gif" />
+    <Content Include="Scripts\ueditor\dialogs\emotion\images\fface.gif" />
+    <Content Include="Scripts\ueditor\dialogs\emotion\images\jxface2.gif" />
+    <Content Include="Scripts\ueditor\dialogs\emotion\images\neweditor-tab-bg.png" />
+    <Content Include="Scripts\ueditor\dialogs\emotion\images\tface.gif" />
+    <Content Include="Scripts\ueditor\dialogs\emotion\images\wface.gif" />
+    <Content Include="Scripts\ueditor\dialogs\emotion\images\yface.gif" />
+    <Content Include="Scripts\ueditor\dialogs\gmap\gmap.html" />
+    <Content Include="Scripts\ueditor\dialogs\help\help.css" />
+    <Content Include="Scripts\ueditor\dialogs\help\help.html" />
+    <Content Include="Scripts\ueditor\dialogs\help\help.js" />
+    <Content Include="Scripts\ueditor\dialogs\image\image.css" />
+    <Content Include="Scripts\ueditor\dialogs\image\image.html" />
+    <Content Include="Scripts\ueditor\dialogs\image\image.js" />
+    <Content Include="Scripts\ueditor\dialogs\image\images\alignicon.jpg" />
+    <Content Include="Scripts\ueditor\dialogs\image\images\bg.png" />
+    <Content Include="Scripts\ueditor\dialogs\image\images\icons.gif" />
+    <Content Include="Scripts\ueditor\dialogs\image\images\icons.png" />
+    <Content Include="Scripts\ueditor\dialogs\image\images\image.png" />
+    <Content Include="Scripts\ueditor\dialogs\image\images\progress.png" />
+    <Content Include="Scripts\ueditor\dialogs\image\images\success.gif" />
+    <Content Include="Scripts\ueditor\dialogs\image\images\success.png" />
+    <Content Include="Scripts\ueditor\dialogs\insertframe\insertframe.html" />
+    <Content Include="Scripts\ueditor\dialogs\internal.js" />
+    <Content Include="Scripts\ueditor\dialogs\link\link.html" />
+    <Content Include="Scripts\ueditor\dialogs\map\map.html" />
+    <Content Include="Scripts\ueditor\dialogs\map\show.html" />
+    <Content Include="Scripts\ueditor\dialogs\music\music.css" />
+    <Content Include="Scripts\ueditor\dialogs\music\music.html" />
+    <Content Include="Scripts\ueditor\dialogs\music\music.js" />
+    <Content Include="Scripts\ueditor\dialogs\preview\preview.html" />
+    <Content Include="Scripts\ueditor\dialogs\scrawl\images\addimg.png" />
+    <Content Include="Scripts\ueditor\dialogs\scrawl\images\brush.png" />
+    <Content Include="Scripts\ueditor\dialogs\scrawl\images\delimg.png" />
+    <Content Include="Scripts\ueditor\dialogs\scrawl\images\delimgH.png" />
+    <Content Include="Scripts\ueditor\dialogs\scrawl\images\empty.png" />
+    <Content Include="Scripts\ueditor\dialogs\scrawl\images\emptyH.png" />
+    <Content Include="Scripts\ueditor\dialogs\scrawl\images\eraser.png" />
+    <Content Include="Scripts\ueditor\dialogs\scrawl\images\redo.png" />
+    <Content Include="Scripts\ueditor\dialogs\scrawl\images\redoH.png" />
+    <Content Include="Scripts\ueditor\dialogs\scrawl\images\scale.png" />
+    <Content Include="Scripts\ueditor\dialogs\scrawl\images\scaleH.png" />
+    <Content Include="Scripts\ueditor\dialogs\scrawl\images\size.png" />
+    <Content Include="Scripts\ueditor\dialogs\scrawl\images\undo.png" />
+    <Content Include="Scripts\ueditor\dialogs\scrawl\images\undoH.png" />
+    <Content Include="Scripts\ueditor\dialogs\scrawl\scrawl.css" />
+    <Content Include="Scripts\ueditor\dialogs\scrawl\scrawl.html" />
+    <Content Include="Scripts\ueditor\dialogs\scrawl\scrawl.js" />
+    <Content Include="Scripts\ueditor\dialogs\searchreplace\searchreplace.html" />
+    <Content Include="Scripts\ueditor\dialogs\searchreplace\searchreplace.js" />
+    <Content Include="Scripts\ueditor\dialogs\snapscreen\snapscreen.html" />
+    <Content Include="Scripts\ueditor\dialogs\spechars\spechars.html" />
+    <Content Include="Scripts\ueditor\dialogs\spechars\spechars.js" />
+    <Content Include="Scripts\ueditor\dialogs\table\dragicon.png" />
+    <Content Include="Scripts\ueditor\dialogs\table\edittable.css" />
+    <Content Include="Scripts\ueditor\dialogs\table\edittable.html" />
+    <Content Include="Scripts\ueditor\dialogs\table\edittable.js" />
+    <Content Include="Scripts\ueditor\dialogs\table\edittd.html" />
+    <Content Include="Scripts\ueditor\dialogs\table\edittip.html" />
+    <Content Include="Scripts\ueditor\dialogs\template\config.js" />
+    <Content Include="Scripts\ueditor\dialogs\template\images\bg.gif" />
+    <Content Include="Scripts\ueditor\dialogs\template\images\pre0.png" />
+    <Content Include="Scripts\ueditor\dialogs\template\images\pre1.png" />
+    <Content Include="Scripts\ueditor\dialogs\template\images\pre2.png" />
+    <Content Include="Scripts\ueditor\dialogs\template\images\pre3.png" />
+    <Content Include="Scripts\ueditor\dialogs\template\images\pre4.png" />
+    <Content Include="Scripts\ueditor\dialogs\template\template.css" />
+    <Content Include="Scripts\ueditor\dialogs\template\template.html" />
+    <Content Include="Scripts\ueditor\dialogs\template\template.js" />
+    <Content Include="Scripts\ueditor\dialogs\video\images\bg.png" />
+    <Content Include="Scripts\ueditor\dialogs\video\images\center_focus.jpg" />
+    <Content Include="Scripts\ueditor\dialogs\video\images\file-icons.gif" />
+    <Content Include="Scripts\ueditor\dialogs\video\images\file-icons.png" />
+    <Content Include="Scripts\ueditor\dialogs\video\images\icons.gif" />
+    <Content Include="Scripts\ueditor\dialogs\video\images\icons.png" />
+    <Content Include="Scripts\ueditor\dialogs\video\images\image.png" />
+    <Content Include="Scripts\ueditor\dialogs\video\images\left_focus.jpg" />
+    <Content Include="Scripts\ueditor\dialogs\video\images\none_focus.jpg" />
+    <Content Include="Scripts\ueditor\dialogs\video\images\progress.png" />
+    <Content Include="Scripts\ueditor\dialogs\video\images\right_focus.jpg" />
+    <Content Include="Scripts\ueditor\dialogs\video\images\success.gif" />
+    <Content Include="Scripts\ueditor\dialogs\video\images\success.png" />
+    <Content Include="Scripts\ueditor\dialogs\video\video.css" />
+    <Content Include="Scripts\ueditor\dialogs\video\video.html" />
+    <Content Include="Scripts\ueditor\dialogs\video\video.js" />
+    <Content Include="Scripts\ueditor\dialogs\webapp\webapp.html" />
+    <Content Include="Scripts\ueditor\dialogs\wordimage\fClipboard_ueditor.swf" />
+    <Content Include="Scripts\ueditor\dialogs\wordimage\imageUploader.swf" />
+    <Content Include="Scripts\ueditor\dialogs\wordimage\tangram.js" />
+    <Content Include="Scripts\ueditor\dialogs\wordimage\wordimage.html" />
+    <Content Include="Scripts\ueditor\dialogs\wordimage\wordimage.js" />
+    <Content Include="Scripts\ueditor\index.html" />
+    <Content Include="Scripts\ueditor\lang\en\en.js" />
+    <Content Include="Scripts\ueditor\lang\en\images\addimage.png" />
+    <Content Include="Scripts\ueditor\lang\en\images\alldeletebtnhoverskin.png" />
+    <Content Include="Scripts\ueditor\lang\en\images\alldeletebtnupskin.png" />
+    <Content Include="Scripts\ueditor\lang\en\images\background.png" />
+    <Content Include="Scripts\ueditor\lang\en\images\button.png" />
+    <Content Include="Scripts\ueditor\lang\en\images\copy.png" />
+    <Content Include="Scripts\ueditor\lang\en\images\deletedisable.png" />
+    <Content Include="Scripts\ueditor\lang\en\images\deleteenable.png" />
+    <Content Include="Scripts\ueditor\lang\en\images\listbackground.png" />
+    <Content Include="Scripts\ueditor\lang\en\images\localimage.png" />
+    <Content Include="Scripts\ueditor\lang\en\images\music.png" />
+    <Content Include="Scripts\ueditor\lang\en\images\rotateleftdisable.png" />
+    <Content Include="Scripts\ueditor\lang\en\images\rotateleftenable.png" />
+    <Content Include="Scripts\ueditor\lang\en\images\rotaterightdisable.png" />
+    <Content Include="Scripts\ueditor\lang\en\images\rotaterightenable.png" />
+    <Content Include="Scripts\ueditor\lang\en\images\upload.png" />
+    <Content Include="Scripts\ueditor\lang\zh-cn\images\copy.png" />
+    <Content Include="Scripts\ueditor\lang\zh-cn\images\localimage.png" />
+    <Content Include="Scripts\ueditor\lang\zh-cn\images\music.png" />
+    <Content Include="Scripts\ueditor\lang\zh-cn\images\upload.png" />
+    <Content Include="Scripts\ueditor\lang\zh-cn\zh-cn.js" />
+    <Content Include="Scripts\ueditor\net\Bin\Newtonsoft.Json.dll" />
+    <Content Include="Scripts\ueditor\net\Bin\Newtonsoft.Json.xml" />
+    <Content Include="Scripts\ueditor\net\net.sln" />
+    <Content Include="Scripts\ueditor\net\upload\image\20170405\6362700779295693116453628.jpg" />
+    <Content Include="Scripts\ueditor\net\upload\image\20170525\6363130722681068148270903.jpg" />
+    <Content Include="Scripts\ueditor\net\upload\image\20171025\6364454247847005717098563.jpg" />
+    <Content Include="Scripts\ueditor\net\upload\image\20171025\6364454249435982275844573.jpg" />
+    <Content Include="Scripts\ueditor\themes\default\css\ueditor.css" />
+    <Content Include="Scripts\ueditor\themes\default\css\ueditor.min.css" />
+    <Content Include="Scripts\ueditor\themes\default\dialogbase.css" />
+    <Content Include="Scripts\ueditor\themes\default\images\anchor.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\arrow.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\arrow_down.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\arrow_up.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\button-bg.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\cancelbutton.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\charts.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\cursor_h.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\cursor_h.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\cursor_v.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\cursor_v.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\dialog-title-bg.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\filescan.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\highlighted.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\icons-all.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\icons.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\icons.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\loaderror.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\loading.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\lock.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\neweditor-tab-bg.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\pagebreak.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\scale.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\sortable.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\spacer.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\sparator_v.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\table-cell-align.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\tangram-colorpicker.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\toolbar_bg.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\unhighlighted.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\upload.png" />
+    <Content Include="Scripts\ueditor\themes\default\images\videologo.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\word.gif" />
+    <Content Include="Scripts\ueditor\themes\default\images\wordpaste.png" />
+    <Content Include="Scripts\ueditor\themes\iframe.css" />
+    <Content Include="Scripts\ueditor\third-party\codemirror\codemirror.css" />
+    <Content Include="Scripts\ueditor\third-party\codemirror\codemirror.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\adapters\mootools-adapter.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\adapters\mootools-adapter.src.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\adapters\prototype-adapter.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\adapters\prototype-adapter.src.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\adapters\standalone-framework.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\adapters\standalone-framework.src.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\highcharts-more.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\highcharts-more.src.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\highcharts.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\highcharts.src.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\modules\annotations.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\modules\annotations.src.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\modules\canvas-tools.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\modules\canvas-tools.src.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\modules\data.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\modules\data.src.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\modules\drilldown.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\modules\drilldown.src.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\modules\exporting.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\modules\exporting.src.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\modules\funnel.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\modules\funnel.src.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\modules\heatmap.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\modules\heatmap.src.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\modules\map.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\modules\map.src.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\modules\no-data-to-display.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\modules\no-data-to-display.src.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\themes\dark-blue.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\themes\dark-green.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\themes\gray.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\themes\grid.js" />
+    <Content Include="Scripts\ueditor\third-party\highcharts\themes\skies.js" />
+    <Content Include="Scripts\ueditor\third-party\jquery-1.10.2.js" />
+    <Content Include="Scripts\ueditor\third-party\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\ueditor\third-party\snapscreen\UEditorSnapscreen.exe" />
+    <Content Include="Scripts\ueditor\third-party\SyntaxHighlighter\shCore.js" />
+    <Content Include="Scripts\ueditor\third-party\SyntaxHighlighter\shCoreDefault.css" />
+    <Content Include="Scripts\ueditor\third-party\video-js\font\vjs.svg" />
+    <Content Include="Scripts\ueditor\third-party\video-js\video-js.css" />
+    <Content Include="Scripts\ueditor\third-party\video-js\video-js.min.css" />
+    <Content Include="Scripts\ueditor\third-party\video-js\video-js.swf" />
+    <Content Include="Scripts\ueditor\third-party\video-js\video.dev.js" />
+    <Content Include="Scripts\ueditor\third-party\video-js\video.js" />
+    <Content Include="Scripts\ueditor\third-party\webuploader\Uploader.swf" />
+    <Content Include="Scripts\ueditor\third-party\webuploader\webuploader.css" />
+    <Content Include="Scripts\ueditor\third-party\webuploader\webuploader.custom.js" />
+    <Content Include="Scripts\ueditor\third-party\webuploader\webuploader.custom.min.js" />
+    <Content Include="Scripts\ueditor\third-party\webuploader\webuploader.flashonly.js" />
+    <Content Include="Scripts\ueditor\third-party\webuploader\webuploader.flashonly.min.js" />
+    <Content Include="Scripts\ueditor\third-party\webuploader\webuploader.html5only.js" />
+    <Content Include="Scripts\ueditor\third-party\webuploader\webuploader.html5only.min.js" />
+    <Content Include="Scripts\ueditor\third-party\webuploader\webuploader.js" />
+    <Content Include="Scripts\ueditor\third-party\webuploader\webuploader.min.js" />
+    <Content Include="Scripts\ueditor\third-party\webuploader\webuploader.withoutimage.js" />
+    <Content Include="Scripts\ueditor\third-party\webuploader\webuploader.withoutimage.min.js" />
+    <Content Include="Scripts\ueditor\third-party\zeroclipboard\ZeroClipboard.js" />
+    <Content Include="Scripts\ueditor\third-party\zeroclipboard\ZeroClipboard.min.js" />
+    <Content Include="Scripts\ueditor\third-party\zeroclipboard\ZeroClipboard.swf" />
+    <Content Include="Scripts\ueditor\ueditor.all.js" />
+    <Content Include="Scripts\ueditor\ueditor.all.min.js" />
+    <Content Include="Scripts\ueditor\ueditor.config.js" />
+    <Content Include="Scripts\ueditor\ueditor.parse.js" />
+    <Content Include="Scripts\ueditor\ueditor.parse.min.js" />
+    <Content Include="Scripts\ViewJs\ActivityDiscount\ActivityDiscountEdit.js" />
+    <Content Include="Scripts\ViewJs\ActivityMinus\ActivityMinusEdit.js" />
+    <Content Include="Scripts\ViewJs\BaseArea\baseAreaEdit.js" />
+    <Content Include="Scripts\ViewJs\GoodsImage\goodsImage.js" />
+    <Content Include="Scripts\ViewJs\Goods\goodsEdit.js" />
+    <Content Include="Scripts\ViewJs\JourneyArticle\journeyArticleEdit.js" />
+    <Content Include="Scripts\ViewJs\BusinessGroup\businessGroupEdit.js" />
+    <Content Include="Scripts\ViewJs\BaseLine\baseLineEdit.js" />
+    <Content Include="Scripts\ViewJs\BaseStation\baseStationEdit.js" />
+    <Content Include="Scripts\ViewJs\BusinessBannerImage\businessBannerImageEdit.js" />
+    <Content Include="Scripts\ViewJs\BusinessComment\BusinessCommentEdit.js" />
+    <Content Include="Scripts\ViewJs\BusinessGroupImage\businessGroupImageEdit.js" />
+    <Content Include="Scripts\ViewJs\RoomImage\roomImage.js" />
+    <Content Include="Scripts\ViewJs\Ticket\TicketEdit.js" />
+    <Content Include="Scripts\ViewJs\Room\roomEdit.js" />
+    <Content Include="Scripts\ViewJs\ProductImage\productImage.js" />
+    <Content Include="Scripts\ViewJs\Product\productEdit.js" />
+    <Content Include="Scripts\ViewJs\DishesImage\dishesImage.js" />
+    <Content Include="Scripts\ViewJs\BusinessImage\businessImageEdit.js" />
+    <Content Include="Scripts\ViewJs\BusinessInfo\businessInfoEdit.js" />
+    <Content Include="Scripts\ViewJs\Dishes\dishesEdit.js" />
+    <Content Include="Scripts\ViewJs\Home\home.js" />
+    <Content Include="Scripts\ViewJs\Login\login.js" />
+    <Content Include="Scripts\ViewJs\PayDetail\payDetailList.js" />
+    <Content Include="Scripts\ViewJs\Order\OrderList.js" />
+    <Content Include="Scripts\ViewJs\SysAccount\editPwd.js" />
+    <Content Include="Scripts\ViewJs\SysAccount\sysAccountEdit.js" />
+    <Content Include="Scripts\ViewJs\SysRole\sysRoleEdit.js" />
+    <Content Include="Scripts\ViewJs\SysMenu\sysMenuEdit.js" />
+    <Content Include="Scripts\ViewJs\User\UserEdit.js" />
+    <Content Include="Scripts\zh.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Scripts\plugins\layer\layim\data\chatlog.json" />
+    <Content Include="Scripts\plugins\layer\layim\data\friend.json" />
+    <Content Include="Scripts\plugins\layer\layim\data\group.json" />
+    <Content Include="Scripts\plugins\layer\layim\data\groups.json" />
+    <Content Include="Scripts\ueditor\net\config.json" />
+    <Content Include="Scripts\ueditor\net\controller.ashx" />
+    <Content Include="Scripts\ueditor\net\README.md" />
+    <Content Include="Scripts\ueditor\net\Web.config" />
+    <Content Include="Scripts\ueditor\third-party\.DS_Store" />
+    <Content Include="Scripts\ueditor\third-party\jquery-1.10.2.min.map" />
+    <Content Include="Scripts\ueditor\third-party\video-js\font\vjs.eot" />
+    <Content Include="Scripts\ueditor\third-party\video-js\font\vjs.ttf" />
+    <Content Include="Scripts\ueditor\third-party\video-js\font\vjs.woff" />
+    <Content Include="Views\SysRole\Edit.cshtml" />
+    <Content Include="Views\SysRole\List.cshtml" />
+    <Content Include="Views\SysMenu\ChildList.cshtml" />
+    <Content Include="Views\SysMenu\Edit.cshtml" />
+    <Content Include="Views\SysMenu\List.cshtml" />
+    <Content Include="Views\SysRoleMenu\Edit.cshtml" />
+    <Content Include="Views\BusinessInfo\Edit.cshtml" />
+    <Content Include="Views\BusinessInfo\List.cshtml" />
+    <Content Include="Views\ActivityDiscount\List.cshtml" />
+    <Content Include="Views\ActivityDiscount\Edit.cshtml" />
+    <Content Include="Views\BusinessLable\List.cshtml" />
+    <Content Include="Views\BusinessLable\Edit.cshtml" />
+    <Content Include="Views\ActivityMinus\List.cshtml" />
+    <Content Include="Views\ActivityMinus\Edit.cshtml" />
+    <Content Include="Views\DishesSpec\Edit.cshtml" />
+    <Content Include="Views\DishesSpec\List.cshtml" />
+    <Content Include="Views\BusinessBannerImage\Edit.cshtml" />
+    <Content Include="Views\BusinessBannerImage\List.cshtml" />
+    <Content Include="Views\DishesSpec\DetailList.cshtml" />
+    <Content Include="Views\DishesSpec\EditDetail.cshtml" />
+    <Content Include="Views\BusinessComment\List.cshtml" />
+    <Content Include="Views\BusinessComment\Edit.cshtml" />
+    <Content Include="Views\BusinessImage\Edit.cshtml" />
+    <Content Include="Views\BusinessImage\List.cshtml" />
+    <Content Include="Views\DishesImage\Edit.cshtml" />
+    <Content Include="Views\DishesImage\List.cshtml" />
+    <Content Include="Views\Dishes\Edit.cshtml" />
+    <Content Include="Views\Dishes\List.cshtml" />
+    <Content Include="Views\DishesCategory\Edit.cshtml" />
+    <Content Include="Views\DishesCategory\List.cshtml" />
+    <Content Include="Views\Order\List.cshtml" />
+    <Content Include="Views\Order\Detail.cshtml" />
+    <Content Include="Views\PayDetail\Detail.cshtml" />
+    <Content Include="Views\PayDetail\List.cshtml" />
+    <Content Include="Views\SysAccount\Edit.cshtml" />
+    <Content Include="Views\SysAccount\List.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\List.cshtml" />
+    <Content Include="Views\SmsLog\List.cshtml" />
+    <Content Include="Views\BaseArea\CityList.cshtml" />
+    <Content Include="Views\BaseArea\Edit.cshtml" />
+    <Content Include="Views\BaseArea\List.cshtml" />
+    <Content Include="Views\BaseLine\Edit.cshtml" />
+    <Content Include="Views\BaseLine\List.cshtml" />
+    <Content Include="Views\BaseStation\Edit.cshtml" />
+    <Content Include="Views\BaseStation\List.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Home\Console_User.cshtml" />
+    <Content Include="Views\Business\Discount.cshtml" />
+    <Content Include="Views\SysAccount\EditPwd.cshtml" />
+    <Content Include="Views\BusinessGroup\Edit.cshtml" />
+    <Content Include="Views\BusinessGroup\List.cshtml" />
+    <Content Include="Views\BusinessEvaluation\Edit.cshtml" />
+    <Content Include="Views\BusinessEvaluation\List.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Product\List.cshtml" />
+    <Content Include="Views\ProductLabel\Edit.cshtml" />
+    <Content Include="Views\ProductLabel\List.cshtml" />
+    <Content Include="Views\ProductImage\Edit.cshtml" />
+    <Content Include="Views\ProductImage\List.cshtml" />
+    <Content Include="Views\BusinessGroupImage\Edit.cshtml" />
+    <Content Include="Views\BusinessGroupImage\List.cshtml" />
+    <Content Include="Views\HotelCategory\Edit.cshtml" />
+    <Content Include="Views\HotelCategory\List.cshtml" />
+    <Content Include="Views\Room\Edit.cshtml" />
+    <Content Include="Views\Room\List.cshtml" />
+    <Content Include="Views\BusinessInfo\CategoryEdit.cshtml" />
+    <Content Include="Views\DishesLabel\Edit.cshtml" />
+    <Content Include="Views\DishesLabel\List.cshtml" />
+    <Content Include="Views\Ticket\Edit.cshtml" />
+    <Content Include="Views\Ticket\List.cshtml" />
+    <Content Include="Views\TicketRelateRoom\Edit.cshtml" />
+    <Content Include="Views\TicketRelateTicket\Edit.cshtml" />
+    <Content Include="Views\TicketRelateTicket\List.cshtml" />
+    <Content Include="Views\TicketRelateRoom\List.cshtml" />
+    <Content Include="Views\JourneyArticle\Edit.cshtml" />
+    <Content Include="Views\JourneyArticle\List.cshtml" />
+    <Content Include="Views\RoomImage\Edit.cshtml" />
+    <Content Include="Views\RoomImage\List.cshtml" />
+    <Content Include="Views\RiceDate\UserList.cshtml" />
+    <Content Include="Views\RiceDate\Detail.cshtml" />
+    <Content Include="Views\RiceDate\List.cshtml" />
+    <Content Include="Views\RiceDate\FeedbackList.cshtml" />
+    <Content Include="Views\BusinessPayConfig\Edit.cshtml" />
+    <Content Include="Views\BusinessPayConfig\List.cshtml" />
+    <Content Include="Views\Order\PayEdit.cshtml" />
+    <Content Include="Views\Goods\Edit.cshtml" />
+    <Content Include="Views\Goods\List.cshtml" />
+    <Content Include="Views\GoodsImage\Edit.cshtml" />
+    <Content Include="Views\GoodsImage\List.cshtml" />
+    <Content Include="Views\Appointment\Edit.cshtml" />
+    <Content Include="Views\Appointment\List.cshtml" />
+    <Content Include="Views\Appointment\Detail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\Test\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Project_Readme.html" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OrderingSystem.Business\OrderingSystem.Business.csproj">
+      <Project>{0447c33d-44d3-4f23-a106-91fab26cde64}</Project>
+      <Name>OrderingSystem.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrderingSystem.Core\OrderingSystem.Core.csproj">
+      <Project>{ae4bdef3-310c-4cf9-9801-bd54917c7c25}</Project>
+      <Name>OrderingSystem.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrderingSystem.Data\OrderingSystem.Data.csproj">
+      <Project>{85c397c4-eb22-4d94-a330-3797adbf7d8e}</Project>
+      <Name>OrderingSystem.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrderingSystem.Domain\OrderingSystem.Domain.csproj">
+      <Project>{2e886fa0-9939-44bd-b9e3-19f1c29ef69b}</Project>
+      <Name>OrderingSystem.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrderingSystem.IService\OrderingSystem.IService.csproj">
+      <Project>{22e243db-f244-4856-8776-032941f910de}</Project>
+      <Name>OrderingSystem.IService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrderingSystem.Service\OrderingSystem.Service.csproj">
+      <Project>{16c2db5d-9663-498a-8fa4-f23857f413cb}</Project>
+      <Name>OrderingSystem.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>
+          </DevelopmentServerVPath>
+          <IISUrl>http://localhost:56923/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

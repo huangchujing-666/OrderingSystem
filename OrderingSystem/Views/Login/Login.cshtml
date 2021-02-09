@@ -1,0 +1,61 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>点餐系统运营平台登陆</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="点餐系统运营平台">
+    <link href="/Content/bootstrap.min.css?v=1.0.1" rel="stylesheet" />
+    <link href="/Content/font-awesome.min.css?v=1.0.1" rel="stylesheet" />
+    <link href="/Content/animate.css?v=1.0.1" rel="stylesheet" />
+    <link href="/Content/style.css?v=1.0.1" rel="stylesheet" />
+    <link href="/Content/plugins/sweetalert/sweetalert.css?v=1.0.1" rel="stylesheet" /> 
+    <link href="/Content/login.css" rel="stylesheet" />
+</head>
+
+<body class="signin">
+    <div class="signinpanel">
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="signin-info">
+                    <div class="logopanel m-b">
+                        <h1>[一生时光 ]</h1>
+                    </div>
+                    <div class="m-b"></div>
+                    <h4>欢迎使用 <strong>点餐系统管理平台</strong></h4>
+                    <ul class="m-b">
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 与深圳地铁、传媒合作，拥有独特的资源优势</li>
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 聚集了不同阶级的美食专家评审团</li>
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 热门主流餐饮品牌建立了良好的合作关系</li>
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 与深圳报业地铁传媒等主流媒体达成了长期的战略合作关系</li>
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 拥有庞大的媒体宣传能力及策划能力</li>
+                    </ul>
+                    <strong>还没有账号？ @*<a href="#">立即注册&raquo;</a>*@<a href="#">联系我们：0755-83112500</a></strong>
+                </div>
+            </div>
+            <div class="col-sm-5"> 
+                    <h4 class="no-margins">登录：</h4>
+                    <p class="m-t-md">登录到点餐系统运营管理平台</p>
+                    <input type="text" id="account" name="account" class="form-control uname" placeholder="用户名" />
+                    <input type="password" id="password" name="password" class="form-control pword m-b" placeholder="密码" />
+                    <a href="">忘记密码了？</a>
+                    <button class="btn btn-success btn-block" id="btnLogin">登录</button>
+                
+            </div>
+        </div>
+        <div class="signup-footer">
+            <div class="pull-left">
+                &copy; 2017 All Rights Reserved. 一生时光
+            </div>
+        </div>
+    </div>
+    <!-- 全局js -->
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="/Scripts/plugins/sweetalert/sweetalert.min.js?v=1.0.1"></script>
+    <script src="/Scripts/ViewJs/Login/login.js?v=1.0.1"></script>
+</body> 
+</html>

@@ -1,0 +1,82 @@
+﻿@using OrderingSystem.Domain
+@{
+    ViewBag.Title = "菜品分类列表";
+}
+@model OrderingSystem.Admin.Models.DishesCategoryVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="row" style="padding:10px 10px;">
+                        <form action="/DishesCategory/List" method="get">
+                            <div class="col-sm-4">
+                                搜索分类名称：
+                                <input type="text" name="QueryName" class="form-control inline" style="width:70%;" placeholder="请输入查询分类名称" value="@(Model.QueryName ?? "")">
+                            </div>
+                            <button type="submit" class="btn btn-info">搜索</button>
+                        </form>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">序号</th>
+                                    <th class="text-center">分类归属</th>
+                                    <th class="text-center">分类名称</th>
+                                    <th class="text-center">创建时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Paging.Items != null && Model.Paging.Items.Count > 0)
+                                {
+                                    foreach (var item in Model.Paging.Items)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@item.DishesCategoryId</td>
+                                            <td class="text-center">
+                                                @if (item.BusinessInfoId == 0)
+                                                {
+                                                    @("系统")
+                                                }
+                                                else
+                                                {
+                                                    @("自定义")
+                                                }
+                                            </td>
+                                            <td class="text-center">@item.Name</td>
+                                            <td class="text-center">@item.CreateTime</td>
+                                            <td>
+                                                @if (Model.BusinessInfoId > 0 && item.BusinessInfoId > 0)
+                                                {
+                                                    <a href="/DishesCategory/Edit?Id=@item.DishesCategoryId" class="btn btn-info"><i class="fa fa-paste padding-right-4"></i>&nbsp;编辑</a>
+                                                    <button onclick="del('/DishesCategory/Delete','/DishesCategory/List','@item.DishesCategoryId')" class="btn btn-danger"><i class="fa fa-times padding-right-4"></i>&nbsp;删除</button>
+                                                }
+                                                else if (OrderingSystem.Admin.Common.Loginer.RoleId == (int)OrderingSystem.Domain.EnumHelp.RoleTypeEnum.系统管理员)
+                                                {
+                                                    <a href="/DishesCategory/Edit?Id=@item.DishesCategoryId" class="btn btn-info"><i class="fa fa-paste padding-right-4"></i>&nbsp;编辑</a>
+                                                    <button onclick="del('/sDishesCategory/Delete','/DishesCategory/List','@item.DishesCategoryId')" class="btn btn-danger"><i class="fa fa-times padding-right-4"></i>&nbsp;删除</button>
+                                                }  
+
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="btn-group">
+                                <a href="/DishesCategory/Edit?BusinessInfoId=@Model.BusinessInfoId" class="btn btn-info" data-refresh="0"><i class="fa fa-plus padding-right-4"></i>&nbsp;添加</a>
+                                <a href="/DishesCategory/List" class="btn btn-info" style="margin-left:10px;" data-refresh="0"><i class="fa fa-refresh padding-right-4"></i>&nbsp;刷新</a>
+                            </div>
+                            @Html.Raw(Model.Paging.Text)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

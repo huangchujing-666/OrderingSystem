@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "票务列表";
+}
+@model OrderingSystem.Admin.Models.TicketRelateRoomVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">序号</th>
+                                    <th class="text-center" style="width:300px;">票务名称</th>
+                                    <th class="text-center">关联酒店</th>
+                                    <th class="text-center">关联房型</th>
+                                    <th class="text-center">数量</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Paging.Items != null && Model.Paging.Items.Count > 0)
+                                {
+                                    foreach (var item in Model.Paging.Items)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@item.TicketRelateRoomId</td>
+                                            <td class="text-center">@item.Ticket.Name</td>
+                                            <td class="text-center">@item.BusinessInfo.Name</td>
+                                            <td class="text-center">@item.Room.Name</td>
+                                            <td class="text-center">@item.Count</td>
+                                            <td>
+                                                <a href="/TicketRelateRoom/Edit/@item.TicketRelateRoomId" class="btn btn-info"><i class="fa fa-paste padding-right-4"></i>&nbsp;编辑</a>
+
+                                                <button onclick="del('/TicketRelateRoom/Delete','/Ticket/List','@item.TicketRelateRoomId')" class="btn btn-danger"><i class="fa fa-times padding-right-4"></i>&nbsp;删除</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="btn-group">
+                                <a href="/TicketRelateRoom/Edit?TicketId=@Model.Id" class="btn btn-info" data-refresh="0"><i class="fa fa-plus padding-right-4"></i>&nbsp;添加</a>
+                                <a href="/TicketRelateRoom/List/@Model.Id" class="btn btn-info" style="margin-left:10px;" data-refresh="0"><i class="fa fa-refresh padding-right-4"></i>&nbsp;刷新</a>
+                            </div>
+                            @Html.Raw(Model.Paging.Text)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.fancy').fancybox();
+        });
+    </script>
+}

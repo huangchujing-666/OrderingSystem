@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "标签编辑";
+}
+@model OrderingSystem.Admin.Models.DishesLabelVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox-content">
+        <div class="ibox-title">
+            <h5>
+                菜品编辑 <small> 添加、修改</small>
+            </h5>
+        </div>
+    </div>
+    <div class="col-sm-12">
+
+        <div class="panel-body">
+            <form class="form-horizontal">
+                <div id="divImgIdHid"></div>
+                <input type="hidden" class="form-control" name="id" id="id" value="@Model.DishesLabel.DishesLableId">
+                @*<input type="hidden" class="form-control" name="dishesLableId" id="dishesLableId" value="@Model.DishesRelateLable.DishesLableId">*@
+                <input type="hidden" class="form-control" name="dishesid" id="dishesid" value="@Model.DishesId">
+                <input type="hidden" class="form-control" name="businessInfoId" id="businessInfoId" value="@Model.BusinessInfoId">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">从这里选择标签：</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" name="selLabel" id="selLabel">
+                            <option value="0">选择已经设置过的标签</option>
+                            @if (Model.DishesLabelList != null && Model.DishesLabelList.Count > 0)
+                            {
+                                foreach (var item in Model.DishesLabelList)
+                                {
+                                    <option value="@item.Name">@item.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">或者输入自定义标签</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" placeholder="请输入标签" maxlength="100" name="name" id="name" value="@Model.DishesLabel.Name">
+                    </div><label class="red-line">*</label>
+                </div>
+
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <button id="btnSave" class="btn btn-primary" type="button">保存内容</button>
+                        <a class="btn btn-white" href="javascript:history.go(-1);">取消</a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+@section script{
+    <script type="text/javascript">
+        $(function () {
+            $("#selLabel").change(function () {
+                $('#name').val($(this).val());
+                console.log($(this).val());
+               });
+
+            $("#btnSave").click(function () {
+
+                var id = $('#id'),
+                   name = $('#name'),
+                dishesid = $('#dishesid'),
+                businessInfoId = $('#businessInfoId');
+                //数据校验
+                if ($.trim(name.val()) == '' || name.val() == null) {
+                    name.focus();
+                    return false;
+                }
+                var dataArr = {
+                    DishesLableId: id.val(),
+                    Name: name.val(),
+                    DishesId: dishesid.val(),
+                    BusinessInfoId: businessInfoId.val()
+                };
+                window.parent.showModal();
+                //提交
+                $.post('/DishesLabel/Edit', dataArr, function (data) {
+                    if (data.Status == 200) {
+                        swal("提示", "操作成功");
+                        setTimeout(function () {
+                            window.location.href = '/DishesLabel/List/' + dishesid.val();
+                        }, 1500);
+                    }
+                    if (data.Status == 202) {
+                        swal("提示", "操作失败");
+                    }
+                    if (data.Status == 203) {
+                        swal("提示", "数据重复");
+                    }
+                }).complete(function () { window.parent.hideModal(); });
+            })
+        });
+    </script>
+}
+

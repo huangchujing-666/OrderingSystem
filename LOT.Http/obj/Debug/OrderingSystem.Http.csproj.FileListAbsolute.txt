@@ -1,0 +1,5 @@
+E:\H5Api\OrderingSystem\LOT.Http\bin\Debug\LOT.Http.dll
+E:\H5Api\OrderingSystem\LOT.Http\bin\Debug\LOT.Http.pdb
+E:\H5Api\OrderingSystem\LOT.Http\obj\Debug\LOT.Http.dll
+E:\H5Api\OrderingSystem\LOT.Http\obj\Debug\LOT.Http.pdb
+E:\H5Api\OrderingSystem\LOT.Http\obj\Debug\OrderingSystem.Http.csprojResolveAssemblyReference.cache

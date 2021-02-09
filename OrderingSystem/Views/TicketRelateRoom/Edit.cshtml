@@ -1,0 +1,149 @@
+﻿@{
+    ViewBag.Title = "票务编辑";
+}
+@using OrderingSystem.Admin.Common;
+@using System.Data.SqlTypes;
+@model OrderingSystem.Admin.Models.TicketRelateRoomVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox-content">
+        <div class="ibox-title">
+            <h5>
+                票务编辑 <small> 添加、修改</small>
+            </h5>
+        </div>
+    </div>
+    <div class="col-sm-12">
+
+        <div class="panel-body">
+            <form class="form-horizontal">
+                <div id="divImgIdHid"></div>
+                <input type="hidden" class="form-control" name="id" id="id" value="@Model.TicketRelateRoom.TicketRelateRoomId">
+                <input type="hidden" class="form-control" name="ticketId" id="ticketId" value="@Model.TicketRelateRoom.TicketId">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">选择关联酒店</label>
+                    <div class="col-sm-4">
+
+                        <select class="form-control" name="RelateBusinessId" id="RelateBusinessId">
+                            <option value="0">请选择酒店</option>
+                            @if (Model.BusinessInfoList != null && Model.BusinessInfoList.Count > 0)
+                            {
+                                foreach (var item in Model.BusinessInfoList)
+                                {
+                                    <option @(Model.TicketRelateRoom.BusinessInfoId == item.BusinessInfoId ? "selected" : "" ) value="@item.BusinessInfoId">@item.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">选择关联房型</label>
+                    <div class="col-sm-4">
+
+                        <select class="form-control" name="RelateRoomId" id="RelateRoomId">
+                            <option value="0">请选择房型</option>
+                            @if (Model.RoomList != null && Model.RoomList.Count > 0)
+                            {
+                                foreach (var item in Model.RoomList)
+                                {
+                                    <option @(Model.TicketRelateRoom.RoomId == item.RoomId ? "selected" : "" ) value="@item.RoomId">@item.Name</option>
+                                }
+                            }
+                        </select>
+
+                    </div><label class="red-line">*</label>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">数量</label>
+                    <div class="col-sm-4">
+                        <input type="number" name="count" id="count" class="form-control" placeholder="请输入数量" value="@(Model.TicketRelateRoom.Count ==0 ? 1 :Model.TicketRelateRoom.Count )">
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <button id="btnSave" class="btn btn-primary" type="button">保存内容</button>
+                        <a class="btn btn-white" href="javascript:history.go(-1);">取消</a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+@section script{
+    <script src="@("/Scripts/plugins/fileinput/fileinput.js"+OrderingSystem.Admin.Versions.Ver)"></script>
+    <script src="@("/Scripts/plugins/fileinput/zh.js"+OrderingSystem.Admin.Versions.Ver)"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var id = $('#id'),
+            ticketId = $('#ticketId'),
+            relateBusinessId = $('#RelateBusinessId');
+            relateRoomId = $('#RelateRoomId');
+            count = $('#count');
+            //保存
+            $('#btnSave').click(function () {
+
+                //验证
+                if (relateBusinessId.val() <= 0) {
+                    swal("提示", "请选择关联酒店");
+                    return false;
+                }
+                if (relateRoomId.val() <= 0) {
+                    swal("提示", "请选择关联房型");
+                    return false;
+                }
+                var dataArr = {
+                    TicketRelateRoomId: id.val(),
+                    TicketId: ticketId.val(),
+                    BusinessInfoId: relateBusinessId.val(),
+                    RoomId: relateRoomId.val(),
+                    Count: count.val()
+                };
+                $.ajax({
+                    type: "post",
+                    url: "/TicketRelateRoom/Edit",
+                    data: dataArr,
+                    dataType: "json",
+                    beforeSend: function () {
+                        //window.parent.showModal();
+                    },
+                    success: function (data) {
+                        if (data.Status == 200) {
+                            swal("提示", "操作成功");
+                            setTimeout(function () {
+                                window.location.href = "/TicketRelateRoom/List/" + ticketId.val();
+                            }, 1500);
+                        }
+                        if (data.Status == 202) {
+                            swal("提示", "操作失败");
+                        }
+                        if (data.Status == 203) {
+                            swal("提示", "数据重复");
+                        }
+                    },
+                    complete: function () {
+                        //window.parent.hideModal();
+                    },
+                });
+            });
+             
+
+            //值改变事件
+            $('#RelateBusinessId').change(function () {
+                $.post('/TicketRelateRoom/GetRoomList', { bid: this.value }, function (data) {
+                    $('#RelateRoomId').empty();
+                    var html = '<option value="0">请选择房型</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        html += '<option value="' + data[i].RoomId + '">' + data[i].Name + '</option>';
+                    }
+                    $('#RelateRoomId').append(html);
+                });
+            });
+        });
+    </script>
+}
+

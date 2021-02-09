@@ -1,0 +1,58 @@
+﻿@using OrderingSystem.Domain
+@{
+    ViewBag.Title = "规格详情列表";
+}
+@model OrderingSystem.Admin.Models.DishesSpecVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">序号</th>
+                                    <th class="text-center">所属规格</th>
+                                    <th class="text-center">详情描述</th>
+                                    <th class="text-center">原价</th>
+                                    <th class="text-center">优惠价格</th> 
+                                    @*<th class="text-center">创建时间</th>*@
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.DishesSpec.DishesSpecDetailList != null && Model.DishesSpec.DishesSpecDetailList.Count > 0)
+                                {
+                                    foreach (var item in Model.DishesSpec.DishesSpecDetailList)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@item.DishesSpecDetailId</td>
+                                            <td class="text-center">@item.DishesSpec.Name</td>
+                                            <td class="text-center">@item.Descript</td>
+                                            <td class="text-center">@item.OrignPrice</td>
+                                            <td class="text-center">@item.RealPrice</td> 
+                                            @*<td class="text-center">@item.DishesLable.CreateTime</td>*@
+                                            <td>
+                                                <a href="/DishesSpec/EditDetail?Id=@item.DishesSpecDetailId" class="btn btn-info"><i class="fa fa-paste padding-right-4"></i>&nbsp;编辑名称</a> 
+                                                <button onclick="del('/DishesSpec/DeleteDetail','/DishesSpec/DetailList/@item.DishesSpec.DishesId','@item.DishesSpecDetailId')" class="btn btn-danger"><i class="fa fa-times padding-right-4"></i>&nbsp;删除</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="btn-group">
+                                <a href="/DishesSpec/EditDetail?DishesSpecId=@Model.DishesSpec.DishesSpecId" class="btn btn-info" data-refresh="0"><i class="fa fa-plus padding-right-4"></i>&nbsp;添加</a>
+                                <a href="/DishesSpec/DetailList/@Model.Id" class="btn btn-info" style="margin-left:10px;" data-refresh="0"><i class="fa fa-refresh padding-right-4"></i>&nbsp;刷新</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

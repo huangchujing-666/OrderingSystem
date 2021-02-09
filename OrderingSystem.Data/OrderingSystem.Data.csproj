@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{85C397C4-EB22-4D94-A330-3797ADBF7D8E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OrderingSystem.Data</RootNamespace>
+    <AssemblyName>OrderingSystem.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.BulkInsert, Version=6.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.BulkInsert-ef6-ext.6.0.3.1\lib\net45\EntityFramework.BulkInsert.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.MappingAPI, Version=6.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.MappingAPI.6.2.0\lib\net45\EntityFramework.MappingAPI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Mapping\Appointment.cs" />
+    <Compile Include="Mapping\ActivityDiscount.cs" />
+    <Compile Include="Mapping\ActivityMinus.cs" />
+    <Compile Include="Mapping\BaseDic.cs" />
+    <Compile Include="Mapping\BaseLine.cs" />
+    <Compile Include="Mapping\BaseStation.cs" />
+    <Compile Include="Mapping\BaseArea.cs" />
+    <Compile Include="Mapping\BaseImage.cs" />
+    <Compile Include="Mapping\BusinessEvaluation.cs" />
+    <Compile Include="Mapping\BusinessGroupImage.cs" />
+    <Compile Include="Mapping\BusinessLable.cs" />
+    <Compile Include="Mapping\BusinessPayConfig.cs" />
+    <Compile Include="Mapping\Goods.cs" />
+    <Compile Include="Mapping\GoodsImage.cs" />
+    <Compile Include="Mapping\HotelCategory.cs" />
+    <Compile Include="Mapping\JpushLog.cs" />
+    <Compile Include="Mapping\RiceDateUser.cs" />
+    <Compile Include="Mapping\RiceDate.cs" />
+    <Compile Include="Mapping\RiceDateFeedback.cs" />
+    <Compile Include="Mapping\OrderCustomer.cs" />
+    <Compile Include="Mapping\OrderStatusLog.cs" />
+    <Compile Include="Mapping\HotelRelateCategory.cs" />
+    <Compile Include="Mapping\JourneyArticle.cs" />
+    <Compile Include="Mapping\RoomImage.cs" />
+    <Compile Include="Mapping\TicketRelateRoom.cs" />
+    <Compile Include="Mapping\TicketRelateTicket.cs" />
+    <Compile Include="Mapping\Ticket.cs" />
+    <Compile Include="Mapping\Room.cs" />
+    <Compile Include="Mapping\ProductImageMap.cs" />
+    <Compile Include="Mapping\ProductRelateLable.cs" />
+    <Compile Include="Mapping\ProductLable.cs" />
+    <Compile Include="Mapping\Product.cs" />
+    <Compile Include="Mapping\BusinessGroup.cs" />
+    <Compile Include="Mapping\BusinessInfo.cs" />
+    <Compile Include="Mapping\BusinessBannerImage.cs" />
+    <Compile Include="Mapping\BusinessComment.cs" />
+    <Compile Include="Mapping\BusinessImage.cs" />
+    <Compile Include="Mapping\BusinessType.cs" />
+    <Compile Include="Mapping\CommentImage.cs" />
+    <Compile Include="Mapping\Dishes.cs" />
+    <Compile Include="Mapping\DishesCategory.cs" />
+    <Compile Include="Mapping\DishesImage.cs" />
+    <Compile Include="Mapping\DishesLable.cs" />
+    <Compile Include="Mapping\DishesRelateLable.cs" />
+    <Compile Include="Mapping\DishesRelateSpec.cs" />
+    <Compile Include="Mapping\DishesSpec.cs" />
+    <Compile Include="Mapping\DishesSpecDetail.cs" />
+    <Compile Include="Mapping\SmsLog.cs" />
+    <Compile Include="Mapping\Level.cs" />
+    <Compile Include="Mapping\Order.cs" />
+    <Compile Include="Mapping\OrderDetail.cs" />
+    <Compile Include="Mapping\OrderStatus.cs" />
+    <Compile Include="Mapping\PayDetail.cs" />
+    <Compile Include="Mapping\RecommendDishes.cs" />
+    <Compile Include="Mapping\SysAccount.cs" />
+    <Compile Include="Mapping\SysRoleMenu.cs" />
+    <Compile Include="Mapping\SysRole.cs" />
+    <Compile Include="Mapping\SysMenu.cs" />
+    <Compile Include="Mapping\SystemLog.cs" />
+    <Compile Include="Mapping\TopSearch.cs" />
+    <Compile Include="Mapping\Customer.cs" />
+    <Compile Include="Mapping\User.cs" />
+    <Compile Include="Mapping\UserLikesMap.cs" />
+    <Compile Include="OrderingSystemDbContext.cs" />
+    <Compile Include="IDbContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\EfRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OrderingSystem.Core\OrderingSystem.Core.csproj">
+      <Project>{ae4bdef3-310c-4cf9-9801-bd54917c7c25}</Project>
+      <Name>OrderingSystem.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrderingSystem.Domain\OrderingSystem.Domain.csproj">
+      <Project>{2E886FA0-9939-44BD-B9E3-19F1C29EF69B}</Project>
+      <Name>OrderingSystem.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

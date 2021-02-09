@@ -1,0 +1,6 @@
+E:\H5Api\OrderingSystem\OrderingSystem.Common\bin\Debug\OrderingSystem.Common.dll
+E:\H5Api\OrderingSystem\OrderingSystem.Common\bin\Debug\OrderingSystem.Common.pdb
+E:\H5Api\OrderingSystem\OrderingSystem.Common\bin\Debug\Aliyun.MNS.dll
+E:\H5Api\OrderingSystem\OrderingSystem.Common\obj\Debug\OrderingSystem.Common.dll
+E:\H5Api\OrderingSystem\OrderingSystem.Common\obj\Debug\OrderingSystem.Common.pdb
+E:\H5Api\OrderingSystem\OrderingSystem.Common\obj\Debug\OrderingSystem.Common.csprojResolveAssemblyReference.cache

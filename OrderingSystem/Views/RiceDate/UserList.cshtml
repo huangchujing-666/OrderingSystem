@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "拼饭参与用户列表";
+}
+@using OrderingSystem.Domain;
+@model OrderingSystem.Admin.Models.RiceDateUserVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">序号</th>
+                                    <th class="text-center">用户ID</th> 
+                                    <th class="text-center">申请状态</th>
+                                    <th class="text-center">创建时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Paging != null && Model.Paging.Count > 0)
+                                {
+                                    foreach (var item in Model.Paging)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@item.RiceDateUserId</td>
+                                            <td class="text-center">
+                                            @if (item.User!=null)
+	                                        {
+		                                        @item.User.NickName
+                                            }
+                                            else
+                                            {
+                                                @item.UserId
+                                            }
+                                            </td> 
+                                            <td class="text-center">
+                                                @if (item.ApplyStatus == (int)EnumHelp.RiceDateApplyStatus.申请中)
+                                                {
+                                                    <span class="label label-primary">申请中</span>
+                                                }
+                                                else if (item.ApplyStatus == (int)EnumHelp.RiceDateApplyStatus.申请通过)
+                                                {
+                                                    <span class="label label-success">申请通过</span>
+                                                }
+                                                else if (item.ApplyStatus == (int)EnumHelp.RiceDateApplyStatus.被驳回)
+                                                {
+                                                    <span class="label label-danger">被驳回</span>
+                                                }
+                                                else if (item.ApplyStatus == (int)EnumHelp.RiceDateApplyStatus.取消申请)
+                                                {
+                                                    <span class="label label-info">取消申请</span>
+                                                }
+                                            </td>
+                                            <td class="text-center">@item.CreateTime</td>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="btn-group">
+                                <a href="/RiceDate/UserList/@Model.Id" class="btn btn-info" style="margin-left:10px;" data-refresh="0"><i class="fa fa-refresh padding-right-4"></i>&nbsp;刷新</a>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

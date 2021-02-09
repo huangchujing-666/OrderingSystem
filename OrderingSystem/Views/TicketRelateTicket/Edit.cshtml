@@ -1,0 +1,116 @@
+﻿@{
+    ViewBag.Title = "票务编辑";
+}
+@using OrderingSystem.Admin.Common;
+@using System.Data.SqlTypes;
+@model OrderingSystem.Admin.Models.TicketRelateTicketVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox-content">
+        <div class="ibox-title">
+            <h5>
+                票务编辑 <small> 添加、修改</small>
+            </h5>
+        </div>
+    </div>
+    <div class="col-sm-12">
+
+        <div class="panel-body">
+            <form class="form-horizontal">
+                <div id="divImgIdHid"></div>
+                <input type="hidden" class="form-control" name="id" id="id" value="@Model.TicketRelateTicket.TicketRelateTicketId">
+                <input type="hidden" class="form-control" name="ticketId" id="ticketId" value="@Model.TicketRelateTicket.TicketId">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">选择关联门票</label>
+                    <div class="col-sm-4">
+
+                        <select class="form-control" name="RelateTicketId" id="RelateTicketId">
+                            <option value="0">请选择门票</option>
+                            @if (Model.TicketList != null && Model.TicketList.Count > 0)
+                            {
+                                foreach (var item in Model.TicketList)
+                                {
+                                    <option @(Model.TicketRelateTicket.RelateTicketId == item.TicketId ? "selected" : "" ) value="@item.TicketId">@item.Name</option>
+                                }
+                            }
+                        </select>
+
+                    </div><label class="red-line">*</label>
+                </div>
+                 
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">数量</label>
+                    <div class="col-sm-4">
+                        <input type="number" name="count" id="count" class="form-control" placeholder="请输入数量" value="@(Model.TicketRelateTicket.Count ==0 ? 1 :Model.TicketRelateTicket.Count )">
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <button id="btnSave" class="btn btn-primary" type="button">保存内容</button>
+                        <a class="btn btn-white" href="javascript:history.go(-1);">取消</a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+@section script{
+    <script src="@("/Scripts/plugins/fileinput/fileinput.js"+OrderingSystem.Admin.Versions.Ver)"></script>
+    <script src="@("/Scripts/plugins/fileinput/zh.js"+OrderingSystem.Admin.Versions.Ver)"></script> 
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var id = $('#id'),
+            ticketId = $('#ticketId'),
+            relateTicketId = $('#RelateTicketId');
+            count = $('#count');
+
+            //保存
+            $('#btnSave').click(function () {
+
+                //验证 
+                if (relateTicketId.val() <= 0) {
+                    swal("提示", "请选择所属商家");
+                    return false;
+                }  
+                var dataArr = {
+                    TicketRelateTicketId: id.val(),
+                    TicketId: ticketId.val(),
+                    RelateTicketId: relateTicketId.val(),
+                    Count: count.val()
+                };
+                $.ajax({
+                    type: "post",
+                    url: "/TicketRelateTicket/Edit",
+                    data: dataArr,
+                    dataType: "json",
+                    beforeSend: function () {
+                        //window.parent.showModal();
+                    },
+                    success: function (data) {
+                        if (data.Status == 200) {
+                            swal("提示", "操作成功");
+                            setTimeout(function () { 
+                                // history.go(-1);
+                                window.location.href = "/TicketRelateTicket/List/" + ticketId.val();
+                            }, 1500);
+                        }
+                        if (data.Status == 202) {
+                            swal("提示", "操作失败");
+                        }
+                        if (data.Status == 203) {
+                            swal("提示", "数据重复");
+                        }
+                    },
+                    complete: function () {
+                        //window.parent.hideModal();
+                    },
+                });
+            });
+        });
+    </script>
+}
+

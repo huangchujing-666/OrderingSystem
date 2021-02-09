@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "商家折扣编辑";
+}
+@model OrderingSystem.Admin.Models.ActivityDiscountVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        商家折扣编辑 <small>添加、修改</small>
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    <form id="from" class="form-horizontal">
+                        <input type="hidden" class="form-control" name="ActivityDiscountId" id="ActivityDiscountId" value="@Model.ActivityDiscountId">
+                        <input type="hidden" class="form-control" name="BusinessInfoId" id="BusinessInfoId" value="@Model.BusinessInfoId">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商家名称</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" placeholder="商家名称" name="Name" readonly="readonly" id="Name" value="@(Model.Name??"")">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商家折扣</label>
+                            <div class="col-sm-4">
+                                <input type="number" class="form-control" placeholder="请输入商家折扣" name="Discount" id="Discount" value="@(Model.Discount)">
+                            </div><label class="red-line">(输入0.01至1以内的数字，如：0.75代表75折，1代表不打折)</label>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button id="btnSave" class="btn btn-primary" type="button">保存内容</button>
+                                <a class="btn btn-white" href="javascript:history.go(-1);">取消</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script{
+    <script src="@("/Scripts/ViewJs/ActivityDiscount/ActivityDiscountEdit.js"+OrderingSystem.Admin.Versions.Ver)"></script>
+}

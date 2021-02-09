@@ -1,0 +1,52 @@
+﻿@using OrderingSystem.Domain
+@{
+    ViewBag.Title = "商家支付配置列表";
+}
+@model OrderingSystem.Admin.Models.BusinessPayConfigVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">序号</th>
+                                    <th class="text-center">支付方式</th> 
+                                    <th class="text-center">创建时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.BusinessPayConfigList != null && Model.BusinessPayConfigList.Count > 0)
+                                {
+                                    foreach (var item in Model.BusinessPayConfigList)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@item.BusinessPayConfigId</td>
+                                            <td class="text-center">@item.Name</td> 
+                                            <td class="text-center">@item.CreateTime</td>
+                                            <td>
+                                                <a href="/BusinessPayConfig/Edit?Id=@item.BusinessPayConfigId" class="btn btn-info"><i class="fa fa-paste padding-right-4"></i>&nbsp;编辑</a>
+                                                <button onclick="del('/BusinessPayConfig/Delete','/BusinessPayConfig/List/@item.BusinessPayConfigId','@item.BusinessPayConfigId')" class="btn btn-danger"><i class="fa fa-times padding-right-4"></i>&nbsp;删除</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="btn-group">
+                                <a href="/BusinessPayConfig/Edit?BusinessInfoId=@Model.Id" class="btn btn-info" data-refresh="0"><i class="fa fa-plus padding-right-4"></i>&nbsp;添加</a>
+                                <a href="/BusinessPayConfig/List/@Model.Id" class="btn btn-info" style="margin-left:10px;" data-refresh="0"><i class="fa fa-refresh padding-right-4"></i>&nbsp;刷新</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

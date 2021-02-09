@@ -1,0 +1,199 @@
+﻿@{
+    ViewBag.Title = "拼饭列表";
+}
+@using OrderingSystem.Domain;
+@model OrderingSystem.Admin.Models.RiceDateVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="row" style="padding:10px 10px;">
+                        <form action="/RiceDate/List" method="get">
+                            <div class="col-sm-4">
+                                商家名称：
+                                <input type="text" name="QueryName" class="form-control inline" style="width:70%;" placeholder="请输入查询商家名称" value="@(Model.QueryName ?? "")">
+                            </div>
+                            <div class="col-sm-3">
+                                <button type="submit" class="btn btn-info">搜索</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">序号</th>
+                                    <th class="text-center">用户</th>
+                                    <th class="text-center">参与年龄</th>
+                                    <th class="text-center">参与性别</th>
+                                    <th class="text-center">参与人数</th>
+                                    <th class="text-center">开始时间</th>
+                                    <th class="text-center">地区</th>
+                                    <th class="text-center">商家</th>
+                                    <th class="text-center">地址</th>
+                                    <th class="text-center">口味</th>
+                                    <th class="text-center">付款方式</th>
+                                    <th class="text-center">备注</th>
+                                    <th class="text-center">状态</th>
+                                    <th class="text-center">创建时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Paging.Items != null && Model.Paging.Items.Count > 0)
+                                {
+                                    foreach (var item in Model.Paging.Items)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@item.RiceDateId</td>
+                                            <td class="text-center">
+                                                @if (item.User != null)
+                                                {
+                                                    @item.User.NickName
+                                                }
+                                                else
+                                                {
+                                                    @item.UserId
+                                                }
+                                            </td>
+                                            <td class="text-center">@item.Age</td>
+                                            <td class="text-center">
+                                                @if (item.Sex == (int)EnumHelp.RiceDateSexType.男士)
+                                                {
+                                                    @("男士")
+                                                }
+                                                else if (item.Sex == (int)EnumHelp.RiceDateSexType.女士)
+                                                {
+                                                    @("女士")
+                                                }
+                                                else if (item.Sex == (int)EnumHelp.RiceDateSexType.皆可)
+                                                {
+                                                    @("皆可")
+                                                }
+                                            </td>
+                                            <td class="text-center">@item.UserCount</td>
+                                            <td class="text-center">@item.BeginDate</td>
+                                            <td class="text-center">@item.Zone</td>
+                                            <td class="text-center">@item.BusinessName</td>
+                                            <td class="text-center">@item.Address</td>
+                                            <td class="text-center">@item.Taste</td>
+                                            <td class="text-center">@item.PayWay</td>
+                                            <td class="text-center">@item.Remark</td>
+                                            <td class="text-center">
+                                                @if (item.Status == 0)
+                                                {
+                                                    <span class="label label-danger">无效</span>
+                                                }
+                                                @if (item.Status == 1)
+                                                {
+                                                    <span class="label label-info">有效</span>
+                                                }
+                                            </td>
+                                            <td class="text-center">@item.CreateTime</td>
+                                            <td>
+                                                <a href="/RiceDate/Detail/@item.RiceDateId" class="btn btn-info"><i class="fa fa-paste padding-right-4"></i>&nbsp;详情</a>
+                                                <button onclick="iframe('报名列表','/RiceDate/UserList/@item.RiceDateId')" class="btn btn-success">报名列表</button>
+                                                <button onclick="iframe('反馈列表','/RiceDate/FeedbackList/@item.RiceDateId')" class="btn btn-success">反馈列表</button>
+                                                @*<a href="/RiceDate/Edit/@item.RiceDateId" class="btn btn-info"><i class="fa fa-paste padding-right-4"></i>&nbsp;编辑</a>*@
+
+                                                @if (item.Status == 0)
+                                                {
+                                                    <button onclick="enable('/RiceDate/UpdateStatus','/RiceDate/List','@item.RiceDateId','@((int)EnumHelp.EnabledEnum.有效)')" class="btn btn-primary"><i class="fa fa-check padding-right-4"></i>&nbsp;启用</button>
+                                                }
+                                                @if (item.Status == 1)
+                                                {
+                                                    <button onclick="disable('/RiceDate/UpdateStatus','/RiceDate/List','@item.RiceDateId','@((int)EnumHelp.EnabledEnum.无效)')" class="btn btn-warning"><i class="fa fa-warning padding-right-4"></i>&nbsp;禁用</button>
+                                                }
+                                                <button onclick="del('/RiceDate/Delete','/RiceDate/List','@item.RiceDateId')" class="btn btn-danger"><i class="fa fa-times padding-right-4"></i>&nbsp;删除</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="btn-group">
+                                @*<a href="/RiceDate/Edit" class="btn btn-info" data-refresh="0"><i class="fa fa-plus padding-right-4"></i>&nbsp;添加</a>*@
+                                <a href="/RiceDate/List" class="btn btn-info" style="margin-left:10px;" data-refresh="0"><i class="fa fa-refresh padding-right-4"></i>&nbsp;刷新</a>
+                            </div>
+                            @Html.Raw(Model.Paging.Text)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row modal">
+    <div class="ibox-content">
+        <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog">
+                <div class="modal-content animated bounceInRight">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span> <span class="sr-only">关闭</span>
+                        </button>
+                        <h4 class="modal-title">详情</h4>
+                    </div>
+                    <div class="modal-body" style="word-break:break-word;">
+                        <div id="content"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ibox-content">
+        <div class="modal inmodal" id="myImgModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content animated bounceInRight">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script{
+    <script type="text/javascript">
+        ////查看详情
+        //var show = function (id) {
+        //    $.ajax({
+        //        type: "post",
+        //        url: "/RiceDate/GetDetail",
+        //        dataType: "json",
+        //        data: { Id: id },
+        //        success: function (data) {
+        //            $('#content').empty();
+        //            var html = "";
+        //            if (data != null) {
+        //                html += '<div class="form-group"><label id="OrderNo">拼饭编号：' + data.RiceDateId + '</label></div>';
+        //                html += '<div class="form-group"><label id="BusinessName">参与年龄：' + data.Age + '</label></div>';
+        //                html += '<div class="form-group"><label id="BusinessName">参与性别：' + data.Sex + '</label></div>';
+        //                html += '<div class="form-group"><label id="BusinessName">参与人数：' + data.UserCount + '</label></div>';
+        //                html += '<div class="form-group"><label id="BusinessName">开始时间：' + data.BeginDate + '</label></div>';
+        //                html += '<div class="form-group"><label id="BusinessName">活动地区：' + data.Zone + '</label></div>';
+        //                html += '<div class="form-group"><label id="BusinessName">商家名称：' + data.BusinessName + '</label></div>';
+        //                html += '<div class="form-group"><label id="BusinessName">商家地址：' + data.Address + '</label></div>';
+        //                html += '<div class="form-group"><label id="BusinessName">商家口味：' + data.Taste + '</label></div>';
+        //                html += '<div class="form-group"><label id="BusinessName">付款方式：' + data.PayWay + '</label></div>';
+        //                html += '<div class="form-group"><label id="UserAccount">发起人：' + data.UserId + '</label></div>';
+        //                html += '<div class="form-group"><label id="CreateTime">发起时间：' + dateFormat(data.CreateTime) + '</label></div>';
+        //                html += '<div class="form-group"><label id="Describes">活动备注：' + data.Remark + '</label></div>';
+        //            }
+        //            $('#content').append(html);
+        //            $('#myModal').modal('show');
+        //        },
+        //        error: function (ex) { }
+        //    });
+        //};
+
+    </script>
+}

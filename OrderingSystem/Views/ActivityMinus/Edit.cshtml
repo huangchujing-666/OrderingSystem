@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "商家满减编辑";
+}
+@model OrderingSystem.Admin.Models.ActivityMinusVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        商家满减编辑 <small>添加、修改</small>
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    <form id="from" class="form-horizontal">
+                        <input type="hidden" class="form-control" name="ActivityMinusId" id="ActivityMinusId" value="@Model.ActivityMinusId">
+                        <input type="hidden" class="form-control" name="BusinessInfoId" id="BusinessInfoId" value="@Model.BusinessInfoId">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">满足金额</label>
+                            <div class="col-sm-4">
+                                @if (Model.ActivityMinusId > 0)
+                                {
+                                    <input type="number" class="form-control" placeholder="请输入满足金额条件" name="AchiveAmount" readonly="readonly" id="AchiveAmount" value="@(Model.ActivityMinus.AchiveAmount.ToString() ?? "")">
+                                }
+                                else
+                                {
+                                    <input type="number" class="form-control" placeholder="请输入满足金额条件" name="AchiveAmount" id="AchiveAmount" value="@(Model.ActivityMinus.AchiveAmount.ToString() ?? "")">
+                                }
+
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">满减金额</label>
+                            <div class="col-sm-4">
+                                <input type="number" class="form-control" placeholder="请输入满减金额" name="MinusAmount" id="MinusAmount" value="@(Model.ActivityMinus.MinusAmount.ToString()??"")">
+                            </div><label class="red-line">(输入满减金额，如：满100元减5元)</label>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button id="btnSave" class="btn btn-primary" type="button">保存内容</button>
+                                <a class="btn btn-white" href="/ActivityMinus/List?BusinessInfoId=@Model.BusinessInfoId">取消</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script{
+    <script src="@("/Scripts/ViewJs/ActivityMinus/ActivityMinusEdit.js"+OrderingSystem.Admin.Versions.Ver)"></script>
+}

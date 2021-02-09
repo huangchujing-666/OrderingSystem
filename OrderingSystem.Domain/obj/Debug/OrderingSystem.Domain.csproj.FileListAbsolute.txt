@@ -1,0 +1,4 @@
+E:\H5Api\OrderingSystem\OrderingSystem.Domain\bin\Debug\OrderingSystem.Domain.dll
+E:\H5Api\OrderingSystem\OrderingSystem.Domain\bin\Debug\OrderingSystem.Domain.pdb
+E:\H5Api\OrderingSystem\OrderingSystem.Domain\obj\Debug\OrderingSystem.Domain.dll
+E:\H5Api\OrderingSystem\OrderingSystem.Domain\obj\Debug\OrderingSystem.Domain.pdb

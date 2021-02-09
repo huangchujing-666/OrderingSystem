@@ -1,0 +1,328 @@
+﻿@{
+    ViewBag.Title = "商家编辑";
+}
+@using OrderingSystem.Admin.Common;
+@model OrderingSystem.Admin.Models.BusinessInfoVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        商家编辑 <small>添加、修改</small>
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal">
+                        <input type="hidden" name="roleId" id="roleId" value="@Model.RoleId">
+                        <input type="hidden" name="id" id="id" value="@Model.BusinessInfo.BusinessInfoId">
+                        <input type="hidden" id="imgInfoId" value="@Model.BusinessInfo.BaseImageId" />
+                        <input type="hidden" id="oldImgInfoId" value="@Model.BusinessInfo.BaseImageId" />
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">所属站点</label>
+                            <div class="col-sm-6" id="appendDiv">
+                                <select class="form-control inline" style="width:150px;" name="provinceId" id="provinceId">
+                                    <option value="0">请选择地区省</option>
+                                    @if (Model.Provinces != null && Model.Provinces.Count > 0)
+                                    {
+                                        foreach (var a in Model.Provinces)
+                                        {
+                                            <option @(Model.City.FId == a.BaseAreaId ? "selected" : "" ) value="@a.BaseAreaId">@a.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <select class="form-control inline" style="width:150px;" name="cityId" id="cityId">
+                                    <option value="0">请选择地区市</option>
+                                    @if (Model.Citys != null && Model.Citys.Count > 0)
+                                    {
+                                        foreach (var b in Model.Citys)
+                                        {
+                                            <option @(Model.BusinessInfo.BaseAreaId == b.BaseAreaId ? "selected" : "") value="@b.BaseAreaId">@b.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <select class="form-control inline" style="width:150px;" name="lineId" id="lineId">
+                                    <option value="0">请选择线路</option>
+                                    @if (Model.Lines != null && Model.Lines.Count > 0)
+                                    {
+                                        foreach (var c in Model.Lines)
+                                        {
+                                            <option @(Model.BusinessInfo.BaseLineId == c.BaseLineId ? "selected" : "") value="@c.BaseLineId">@c.LineName</option>
+                                        }
+                                    }
+                                </select>
+                                <select class="form-control inline" style="width:150px;" name="stationId" id="stationId">
+                                    <option value="0">请选择站点</option>
+                                    @if (Model.Stations != null && Model.Stations.Count > 0)
+                                    {
+                                        foreach (var d in Model.Stations)
+                                        {
+                                            <option @(Model.BusinessInfo.BaseStationId == d.BaseStationId ? "selected" : "") value="@d.BaseStationId">@d.Name</option>
+                                        }
+                                    }
+                                </select><label class="red-line">*</label>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">模块类型</label>
+                            <div class="col-sm-4">
+                                <select class="form-control inline" style="width:150px;" name="businessTypeId" id="businessTypeId">
+                                    <option value="0">请选择模块类型</option>
+                                    <option @(Model.BusinessInfo.BusinessTypeId == 1 ? "selected" : "") value="1">食模块</option>
+                                    <option @(Model.BusinessInfo.BusinessTypeId == 2 ? "selected" : "") value="2">衣模块</option>
+                                    <option @(Model.BusinessInfo.BusinessTypeId == 3 ? "selected" : "") value="3">乐模块</option>
+                                    <option @(Model.BusinessInfo.BusinessTypeId == 4 ? "selected" : "") value="4">酒店</option>
+                                    <option @(Model.BusinessInfo.BusinessTypeId == 5 ? "selected" : "") value="5">景点</option>
+                                </select>
+                                <label class="control-label bgroup">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分组类型</label>
+                                <select class="form-control inline bgroup" style="width:150px;" name="businessGroupId" id="businessGroupId">
+                                    <option value="0">请选择分组类型</option>
+                                    @if (Model.BusinessGroupList != null && Model.BusinessGroupList.Count > 0)
+                                    {
+                                        foreach (var d in Model.BusinessGroupList)
+                                        {
+                                            <option @(Model.BusinessInfo.BusinessGroupId == d.BusinessGroupId ? "selected" : "") value="@d.BusinessGroupId">@d.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                             
+                            <label class="red-line">*</label>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商家名称</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" placeholder="请输入商家名称" maxlength="100" name="name" id="name" value="@(Model.BusinessInfo.Name??"")">
+                            </div><label class="red-line">*</label>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="jiudian-layer">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">开业时间</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" placeholder="请输入开业时间" maxlength="100" name="openDate" id="openDate" value="@(Model.BusinessInfo.OpenDate??"")">
+                                </div><label class="red-line">*</label>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">装修时间</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" placeholder="请输入装修时间" maxlength="100" name="refreshDate" id="refreshDate" value="@(Model.BusinessInfo.RefreshDate??"")">
+                                </div><label class="red-line">*</label>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">总房间数</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" placeholder="请输入总房间数" maxlength="100" name="totalRooms" id="totalRooms" value="@(Model.BusinessInfo.TotalRooms??"")">
+                                </div><label class="red-line">*</label>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">楼层总数</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" placeholder="请输入楼层总数" maxlength="100" name="totalFloors" id="totalFloors" value="@(Model.BusinessInfo.TotalFloors??"")">
+                                </div><label class="red-line">*</label>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">联系电话</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" placeholder="请输入联系电话" maxlength="100" name="mobile" id="mobile" value="@(Model.BusinessInfo.Mobile??"")">
+                            </div><label class="red-line">*</label>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">联系地址</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" placeholder="请输入联系地址" maxlength="500" name="address" id="address" value="@(Model.BusinessInfo.Address??"")">
+                            </div><label class="red-line">*</label>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">纬度精度</label>
+                            <div class="col-sm-4">
+                                纬度（N） <input type="text" class="form-control inline" @(int.Parse(Loginer.BusinessId) > 0 ? "disabled" : "") placeholder="请输入精度" style="width:150px;" maxlength="500" name="latitude" id="latitude" value="@(Model.BusinessInfo.Latitude)">
+                                精度（E）<input type="text" class="form-control inline" @(int.Parse(Loginer.BusinessId) > 0 ? "disabled" : "") placeholder="请输入纬度" style="width:150px;" maxlength="500" name="longitude" id="longitude" value="@(Model.BusinessInfo.Longitude)">
+                            </div><label class="red-line">*</label>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">月销售数量</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" @(int.Parse(Loginer.BusinessId) > 0 ? "disabled" : "") placeholder="请输入月销售数量" maxlength="100" name="orderCountPerMonth" id="orderCountPerMonth" value="@(Model.BusinessInfo.OrderCountPerMonth)">
+                            </div><label class="red-line">*</label>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商家等级</label>
+                            <div class="col-sm-4">
+                                <input type="number" class="form-control" @(int.Parse(Loginer.BusinessId) > 0 ? "disabled" : "") placeholder="请输入商家等级" maxlength="100" name="grade" id="grade" value="@(Model.BusinessInfo.Grade)">
+                            </div><label class="red-line">*</label>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">人均消费</label>
+                            <div class="col-sm-4">
+                                <input type="number" class="form-control" placeholder="请输入人均消费" maxlength="100" name="averagePay" id="averagePay" value="@(Model.BusinessInfo.AveragePay)">
+                            </div><label class="red-line">*</label>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">营业时间</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" placeholder="请输入营业时间" maxlength="100" name="businessHour" id="businessHour" value="@(Model.BusinessInfo.BusinessHour??"")">
+                            </div><label class="red-line">*</label>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">排序号</label>
+                            <div class="col-sm-4">
+                                <input type="number" class="form-control" placeholder="请输入排序号" maxlength="1000" name="sortNo" id="sortNo" value="@(Model.BusinessInfo.SortNo)">
+                            </div><label class="red-line">*</label>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商家公告</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" placeholder="请输入公告内容" maxlength="500" name="notic" id="notic" value="@(Model.BusinessInfo.Notic??"")">
+                            </div><label class="red-line">*</label>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商家介绍</label>
+                            <div class="col-sm-4">
+                                <textarea type="text" class="form-control" style="height:150px;" placeholder="请输入商家介绍" maxlength="500" name="introduction" id="introduction">@(Model.BusinessInfo.Introduction ?? "")</textarea>
+                            </div><label class="red-line">*</label>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">服务设施</label>
+                            <div class="col-sm-6">
+                                <textarea name="services" id="services"></textarea>
+                                @*<textarea type="text" class="form-control" placeholder="请输入服务设施" name="services" id="services">@(Model.BusinessInfo.Services ?? "")</textarea>*@
+                            </div><label class="red-line">*</label>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        @*<div class="form-group">
+                                <label class="col-sm-2 control-label">商家介绍</label>
+                                <div class="col-sm-8">
+                                    <textarea id="introduces" name="introduces"></textarea>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>*@
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商家Logo图</label>
+                            <div class="col-sm-6">
+                                <input id="filename" name="filename" type="file" class="file-loading" multiple data-show-upload="true" data-show-caption="true">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button id="btnSave" class="btn btn-primary" type="button">保存</button>
+                                <a class="btn btn-white" href="javascript:history.go(-1);">取消</a>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script{
+    <script src="@("/Scripts/plugins/fileinput/fileinput.js"+OrderingSystem.Admin.Versions.Ver)"></script>
+    <script src="@("/Scripts/plugins/fileinput/zh.js"+OrderingSystem.Admin.Versions.Ver)"></script>
+    <script src="@("/Scripts/ViewJs/BusinessInfo/businessInfoEdit.js"+OrderingSystem.Admin.Versions.Ver)"></script>
+    <script type="text/javascript">
+
+        //初始化编辑器
+        initEditor('@Html.Raw(Model.BusinessInfo.Services)', 'services');
+
+        //商家缩略图
+        var img = [];
+        if ('@Model.ImgInfo.Path' != '') {
+            var str = '<img src="@(Model.ImgInfo.Source + Model.ImgInfo.Path)" class="kv-preview-thumb kv-file-content file-preview-image" />';
+            img.push(str);
+        }
+        $('#filename').fileinput({
+            language: 'zh',
+            allowedFileTypes: ['image'],
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
+            uploadUrl: '/Uploader/ImgFile?folder=Business&title=商家缩略图',
+            showUpload: false,  //是否显示上传按钮
+            showRemove: true,   //显示移除按钮
+            maxFileSize: 2000,
+            showCaption: true,  //是否显示标题
+            maxFileCount: 1,    //表示允许同时上传的最大文件个数
+            maxFileSize: 1024,   //单位为kb，如果为0表示不限制文件大小
+            initialPreview: img,
+            dropZoneTitle: '请选择需要上传的图片(200px*200px)',
+        });
+        //上传成功回调事件
+        $("#filename").on("fileuploaded", function (event, data, previewId, index) {
+            $('#imgInfoId').val(data.response);
+        });
+        //移除事件
+        $("#filename").on("fileclear", function (event, data, previewId, index) {
+            $.post("/Uploader/DeleteFile", { Id: $('#imgInfoId').val() }, function (data) { });
+        });
+         
+        $(document).ready(function () {
+            var _group = $("#businessTypeId").val();
+            if (_group == 3||_group == 2) {
+                $(".bgroup").show().addClass("inline");
+            } else {
+                $(".bgroup").hide().removeClass("inline");
+            }
+
+            //酒店
+            if (_group == 4) {
+                $(".jiudian-layer").show();
+            } else {
+                $(".jiudian-layer").hide();
+            }
+
+            $("#businessTypeId").change(function () {
+
+                $.post('/BusinessInfo/GetGroupByType', { typeid: this.value }, function (data) {
+                    $('#businessGroupId').empty();
+                    var html = '<option value="0">请选择分组类型</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        html += '<option value="' + data[i].BusinessGroupId + '">' + data[i].Name + '</option>';
+                    }
+                    $('#businessGroupId').append(html);
+                });
+
+                var _tmp = $(this).val();
+                //乐
+                if (_tmp == 3 ||_tmp == 2 ) {
+                    $(".bgroup").show().addClass("inline");
+                } else {
+                    $(".bgroup").hide().removeClass("inline");
+                }
+
+                //酒店
+                if (_tmp == 4) {
+                    $(".jiudian-layer").show();
+                } else {
+                    $(".jiudian-layer").hide(); 
+                }
+            });
+        })
+          
+      
+
+    </script>
+}
+

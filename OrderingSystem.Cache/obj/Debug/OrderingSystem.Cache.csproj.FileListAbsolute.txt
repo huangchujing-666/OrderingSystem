@@ -1,0 +1,9 @@
+E:\H5Api\OrderingSystem\OrderingSystem.Cache\bin\Debug\OrderingSystem.Cache.dll
+E:\H5Api\OrderingSystem\OrderingSystem.Cache\bin\Debug\OrderingSystem.Cache.pdb
+E:\H5Api\OrderingSystem\OrderingSystem.Cache\bin\Debug\Newtonsoft.Json.dll
+E:\H5Api\OrderingSystem\OrderingSystem.Cache\bin\Debug\StackExchange.Redis.dll
+E:\H5Api\OrderingSystem\OrderingSystem.Cache\bin\Debug\Newtonsoft.Json.xml
+E:\H5Api\OrderingSystem\OrderingSystem.Cache\bin\Debug\StackExchange.Redis.xml
+E:\H5Api\OrderingSystem\OrderingSystem.Cache\obj\Debug\OrderingSystem.Cache.dll
+E:\H5Api\OrderingSystem\OrderingSystem.Cache\obj\Debug\OrderingSystem.Cache.pdb
+E:\H5Api\OrderingSystem\OrderingSystem.Cache\obj\Debug\OrderingSystem.Cache.csprojResolveAssemblyReference.cache

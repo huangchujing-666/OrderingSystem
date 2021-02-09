@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "用户编辑";
+}
+@model OrderingSystem.Admin.Models.UserVM
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        用户编辑 <small>添加、修改</small>
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    <form id="from" class="form-horizontal">
+                        <input type="hidden" class="form-control" name="id" id="id" value="@Model.User.UserId">
+                        <input type="hidden" id="imgInfoId" value="@Model.User.BaseImageId" />
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">用户名称</label>
+                            <div class="col-sm-4">
+                                <input type="text" name="NickName" id="NickName" class="form-control" placeholder="请输入用户名称" value="@(Model.User.NickName ?? "")">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">电话</label>
+                            <div class="col-sm-4">
+                                <input type="text" name="PhoneNo" id="PhoneNo" class="form-control" placeholder="请输入电话" value="@(Model.User.PhoneNo ?? "")">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">用户图像</label>
+                            <div class="col-sm-6">
+                                <input id="filename" name="filename" type="file" class="file-loading" multiple data-show-upload="true" data-show-caption="true">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button id="btnSave" class="btn btn-primary" type="button">保存内容</button>
+                                <a class="btn btn-white" href="javascript:history.go(-1);">取消</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script{
+<script src="@("/Scripts/plugins/fileinput/fileinput.js"+OrderingSystem.Admin.Versions.Ver)"></script>
+<script src="@("/Scripts/plugins/fileinput/zh.js"+OrderingSystem.Admin.Versions.Ver)"></script>
+    <script src="@("/Scripts/ViewJs/User/UserEdit.js"+OrderingSystem.Admin.Versions.Ver)"></script>
+<script type="text/javascript">
+
+
+        //商家缩略图
+    var img = [];
+
+    if ('@Model.ImgInfo.Path' != '') {
+            var str = '<img src="@(Model.ImgInfo.Source + Model.ImgInfo.Path)" class="kv-preview-thumb kv-file-content file-preview-image" />';
+            img.push(str);
+        }
+        $('#filename').fileinput({
+            language: 'zh',
+            allowedFileTypes: ['image'],
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
+            uploadUrl: '/Uploader/ImgFile?folder=User&title=用户图像',
+            showUpload: false,  //是否显示上传按钮
+            showRemove: true,   //显示移除按钮
+            maxFileSize: 2000,
+            showCaption: true,  //是否显示标题
+            maxFileCount: 1,    //表示允许同时上传的最大文件个数
+            maxFileSize: 1024,   //单位为kb，如果为0表示不限制文件大小
+            initialPreview: img,
+            dropZoneTitle: '请选择需要上传的图片(200px*200px)',
+        });
+        //上传成功回调事件
+        $("#filename").on("fileuploaded", function (event, data, previewId, index) {
+            $('#imgInfoId').val(data.response);
+        });
+        //移除事件
+        $("#filename").on("fileclear", function (event, data, previewId, index) {
+            $.post("/Uploader/DeleteFile", { Id: $('#imgInfoId').val() }, function (data) { });
+        });
+</script>
+}
+
+
